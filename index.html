@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kickball Interescuelas UTB</title>
+<meta name="description" content="Torneo Interescuelas de Kickball UTB 2026-2: calendario, resultados, tabla de posiciones, evidencias, equipos y reglamento.">
+<meta name="theme-color" content="#0A1A3F">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Torneo Interescuelas de Kickball UTB">
+<meta property="og:description" content="EIAD, ENLS y ETD · Calendario, resultados y tabla de posiciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+html{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: marcador de estadio — cabecera azul noche con trazo de resaltador lima, contenido en tarjetas-tablero, navegación inferior en móvil */
+:root{
+  --bg:#EDF2F9; --surface:#FFFFFF; --surface-2:#F5F8FC; --ink:#0B1630; --muted:#56637E; --line:#D4DDEB;
+  --accent:#1747E0; --accent-ink:#FFFFFF; --marker:#D7F23B; --marker-ink:#0B1630; --clay:#C98552;
+  --night:#0A1A3F; --night-ink:#EAF0FB;
+  --ok:#147A4B; --warn:#B25E00; --bad:#B42318;
+  --t-iad:#F0573A; --t-nlys:#0079E6; --t-td:#5719D3;
+  --f-display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-num:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#070F22; --surface:#0F1B36; --surface-2:#13213F; --ink:#E8EEFA; --muted:#97A5C2; --line:#24345A;
+  --accent:#6D8DFF; --accent-ink:#06102A; --marker:#D7F23B; --marker-ink:#0B1630; --clay:#D99A69;
+  --night:#040A19; --night-ink:#EAF0FB; --ok:#43C58A; --warn:#F3A543; --bad:#FF7A6E;
+  --t-iad:#FF7A5C; --t-nlys:#3EA2FF; --t-td:#9A6BFF; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#070F22; --surface:#0F1B36; --surface-2:#13213F; --ink:#E8EEFA; --muted:#97A5C2; --line:#24345A;
+  --accent:#6D8DFF; --accent-ink:#06102A; --marker:#D7F23B; --marker-ink:#0B1630; --clay:#D99A69;
+  --night:#040A19; --night-ink:#EAF0FB; --ok:#43C58A; --warn:#F3A543; --bad:#FF7A6E;
+  --t-iad:#FF7A5C; --t-nlys:#3EA2FF; --t-td:#9A6BFF; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--night)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--marker);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+
+/* Cabecera */
+.top{background:var(--night);color:var(--night-ink)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding-block:10px;min-height:56px}
+.brand{display:flex;align-items:baseline;gap:8px;text-decoration:none;color:inherit;white-space:nowrap}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:24px;letter-spacing:.5px;position:relative;z-index:0}
+.brand b::after{content:"";position:absolute;left:-4px;right:-6px;bottom:4px;height:9px;background:var(--marker);z-index:-1;transform:skewX(-14deg);opacity:.9}
+.brand span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.edit-btn{margin-left:auto;appearance:none;border:1px solid rgba(255,255,255,.28);background:transparent;color:var(--night-ink);border-radius:999px;padding:7px 14px;font-weight:600;font-size:13.5px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;white-space:nowrap}
+.edit-btn:hover{border-color:var(--marker)}
+.edit-btn svg{width:16px;height:16px}
+.edit-btn.on{background:var(--marker);color:var(--marker-ink);border-color:var(--marker)}
+
+/* Menú (debajo del inicio) */
+.menu{background:var(--night);position:sticky;top:env(safe-area-inset-top,0px);z-index:20;border-top:1px solid rgba(255,255,255,.08);box-shadow:0 6px 18px rgba(4,10,25,.18)}
+.menu .wrap{padding-block:8px}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;justify-content:center}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:0;background:transparent;color:var(--night-ink);opacity:.8;padding:9px 14px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap;flex:none}
+.tab:hover{opacity:1;background:rgba(255,255,255,.08)}
+.tab[aria-current="page"]{opacity:1;background:var(--marker);color:var(--marker-ink)}
+.tab svg{width:18px;height:18px;flex:none}
+@media (max-width:820px){.tabs{justify-content:flex-start}.brand span{display:none}.tab{padding:8px 11px;font-size:13.5px}}
+
+/* Portada */
+.hero{background:var(--night);color:var(--night-ink);overflow:hidden;position:relative}
+.hero[hidden]{display:none}
+.hero .wrap{padding-block:22px 30px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:center}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--marker)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(42px,6.6vw,76px);line-height:.94;letter-spacing:.5px;margin-top:8px}
+.hero h1 em{font-style:normal;position:relative;z-index:0;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:-6px;right:-10px;bottom:10%;height:26%;background:var(--marker);z-index:-1;transform:skewX(-14deg) rotate(-1.5deg);opacity:.92}
+.hero p{max-width:46ch;opacity:.85;margin:12px 0 0}
+.crest-row{display:flex;gap:clamp(8px,2vw,20px);margin-top:20px;flex-wrap:wrap}
+.crest-row .crest{width:clamp(92px,11vw,128px)}
+.crest{display:block}.crest svg{display:block;width:100%;height:auto}.ccard .live{display:block}
+.diamond{position:absolute;left:38%;top:-140px;width:520px;height:520px;border:2px solid rgba(255,255,255,.05);transform:rotate(45deg);pointer-events:none}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+
+/* logos animados en la portada */
+.live .kb-spin{transform-box:fill-box;transform-origin:center;animation:kbspin 9s linear infinite}
+.live .kb-ball{transform-box:fill-box;transform-origin:center;animation:kbbob 1.8s ease-in-out infinite}
+.live .kb-trail{animation:kbtrail 1.8s ease-in-out infinite}
+.live .kb-dash{animation:kbdash 2.4s ease-in-out infinite}
+@keyframes kbspin{to{transform:rotate(360deg)}}
+@keyframes kbbob{50%{transform:translate(4px,-6px)}}
+@keyframes kbtrail{50%{transform:translateX(-8px);opacity:.7}}
+@keyframes kbdash{50%{transform:translateX(16px)}}
+
+/* Slider de partidos */
+.cascade{position:relative;height:var(--ch);--ch:200px;overflow:hidden;border-radius:18px;box-shadow:0 18px 36px rgba(0,0,0,.35);touch-action:pan-y}
+.ccard{position:absolute;inset:0;border-radius:18px;overflow:hidden;color:#fff;transition:transform .7s cubic-bezier(.65,0,.35,1),opacity .7s ease;will-change:transform;transform:translateX(100%)}
+.ccard .bg{position:absolute;inset:0}
+.ccard .in{position:relative;height:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:18px 22px}
+.ccard .crest{width:112px}
+.ccard .mid{text-align:center;min-width:0}
+.ccard .mid .k{font-family:var(--f-num);font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;opacity:.92}
+.ccard .mid .v{font-family:var(--f-display);font-size:46px;line-height:1.05}
+.ccard .mid .d{font-family:var(--f-num);font-weight:600;font-size:17px;background:rgba(0,0,0,.3);display:inline-block;padding:3px 12px;border-radius:999px;margin-top:4px;white-space:nowrap}
+.ccard .tbd{width:112px;height:112px;border-radius:50%;border:2px dashed rgba(255,255,255,.6);display:grid;place-items:center;font-family:var(--f-display);font-size:28px}
+.cascade-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.cascade-ctl{display:flex;gap:6px}
+.cascade-ctl button{appearance:none;width:9px;height:9px;border-radius:999px;border:0;background:rgba(255,255,255,.3);padding:0;cursor:pointer;transition:width .3s}
+.cascade-ctl button[aria-current="true"]{width:26px;background:var(--marker)}
+.arrows{display:flex;gap:6px}
+.arrows button{appearance:none;width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:var(--night-ink);cursor:pointer;display:grid;place-items:center}
+.arrows button:hover{border-color:var(--marker);color:var(--marker)}
+@media (max-width:520px){.cascade{--ch:160px}.ccard .crest,.ccard .tbd{width:72px}.ccard .tbd{height:72px;font-size:22px}.ccard .mid .v{font-size:32px}.ccard .mid .d{font-size:14px}.ccard .mid .k{font-size:12px}.ccard .in{padding:12px 14px;gap:8px}}
+@media (prefers-reduced-motion:reduce){.ccard{transition:none}.live .kb-spin,.live .kb-ball,.live .kb-trail,.live .kb-dash{animation:none}}
+
+/* Secciones */
+main section{display:none}
+main section.on{display:block}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:28px 0 14px}
+.sec-head h2{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,4.4vw,40px);letter-spacing:.4px;line-height:1}
+.sec-head p{margin:4px 0 0;color:var(--muted);max-width:60ch}
+.grid-2{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+@media (max-width:900px){.grid-2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-width:0}
+.card-pad{padding:18px}
+.label{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.muted{color:var(--muted)}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:10px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.danger{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 40%,var(--line))}
+.btn.small{padding:6px 10px;font-size:13px}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+
+/* Partido */
+.match{display:grid;gap:12px;padding:16px 18px}
+.match-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.mnum{font-family:var(--f-num);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.mnum small{font-weight:600;color:var(--muted);letter-spacing:.04em}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.final{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.pill.live{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.pill.live::before{animation:blink 1.2s infinite}
+.pill.wo{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+@keyframes blink{50%{opacity:.2}}
+@media (prefers-reduced-motion:reduce){.pill.live::before{animation:none}}
+.versus{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px}
+.side{display:flex;align-items:center;gap:10px;min-width:0}
+.side.r{flex-direction:row-reverse;text-align:right}
+.side .crest{width:52px;flex:none}
+.side .nm{min-width:0}.side .nm b,.side .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.side .nm b{display:block;font-family:var(--f-display);font-weight:400;font-size:21px;letter-spacing:.3px;line-height:1.05}
+.side .nm span{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
+.score{font-family:var(--f-num);font-weight:700;font-size:40px;line-height:1;display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+.score .dash{color:var(--muted);font-size:26px}
+.score .win{color:var(--ink)} .score .lose{color:var(--muted)}
+.vs{font-family:var(--f-display);font-size:22px;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
+.meta span{display:inline-flex;align-items:center;gap:6px}
+.meta svg{width:15px;height:15px}
+@media (max-width:520px){.versus{gap:6px}.side{gap:6px}.side .crest{width:32px}.side .nm b{font-size:17px}.side .nm span{display:none}.score{font-size:28px;gap:4px}.score .dash{font-size:20px}}
+
+/* Marcador por entradas */
+.linescore{overflow-x:auto;border-radius:10px;border:1px solid var(--line)}
+.linescore table{border-collapse:collapse;width:100%;min-width:300px;font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.linescore th,.linescore td{padding:6px 6px;text-align:center;font-size:15px;border-bottom:1px solid var(--line)}
+.linescore tr:last-child td{border-bottom:0}
+.linescore th{font-size:12px;letter-spacing:.08em;color:var(--muted);font-weight:600;background:var(--surface-2)}
+.linescore td:first-child,.linescore th:first-child{text-align:left;font-family:var(--f-body);font-weight:600;font-size:13.5px;white-space:nowrap}
+.linescore td.tot{font-weight:700;font-size:18px;background:var(--surface-2)}
+.linescore .tdot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:1px}
+
+/* Tabla de posiciones */
+.standings{overflow-x:auto}
+.standings table{border-collapse:collapse;width:100%;min-width:520px;font-variant-numeric:tabular-nums}
+.standings th{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:center;padding:10px 8px;border-bottom:1px solid var(--line)}
+.standings td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);font-family:var(--f-num);font-size:18px;font-weight:600}
+.standings tr:last-child td{border-bottom:0}
+.standings th:nth-child(2),.standings td:nth-child(2){text-align:left}
+.standings td.pts{font-size:24px;font-weight:700}
+.pos{font-family:var(--f-display);font-weight:400;font-size:22px;width:44px}
+.tm{display:flex;align-items:center;gap:10px;font-family:var(--f-body);font-size:15px;font-weight:600}
+.tm .crest{width:34px;flex:none}
+.tm small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.qual td:first-child{box-shadow:inset 4px 0 0 var(--marker)}
+.mini table{min-width:0}.mini td{font-size:16px;padding:8px 6px}.mini .tm small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:22ch}.mini .tm>div{min-width:0}@media (max-width:520px){.mini .tm small{display:none}}.mini .tm .crest{width:28px}.mini th{padding:8px 6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;background:var(--marker);border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* Próximo partido */
+.next{background:var(--accent);color:var(--accent-ink);border-color:transparent;overflow:hidden;position:relative}
+.next .label{color:inherit;opacity:.8}
+.next .side .nm span{color:inherit;opacity:.8}
+.next .vs{color:inherit;opacity:.7}
+.countdown{font-family:var(--f-display);font-size:44px;line-height:1}
+.champ{display:flex;align-items:center;gap:16px;background:var(--marker);color:var(--marker-ink);border-radius:var(--r);padding:16px 18px;margin-top:18px}
+.champ .crest{width:72px;flex:none}
+.champ b{font-family:var(--f-display);font-weight:400;font-size:30px;display:block;line-height:1}
+
+.stack{display:grid;gap:14px}
+.list-results{display:grid;gap:0}
+.rrow{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.rrow:last-child{border-bottom:0}
+.rrow .sc{font-family:var(--f-num);font-weight:700;font-size:20px;font-variant-numeric:tabular-nums;text-align:center}
+.rrow .t{display:flex;align-items:center;gap:8px;min-width:0;font-weight:600}
+.rrow .t.r{justify-content:flex-end;text-align:right}
+.rrow .t .crest{width:26px;flex:none}
+.rrow .d{font-family:var(--f-num);color:var(--muted);font-size:14px;width:52px}
+
+.phase{font-family:var(--f-num);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--muted);margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.phase::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* Equipos */
+.teams{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.teams{grid-template-columns:1fr}}
+.team-card{overflow:hidden}
+.team-band{padding:18px;display:flex;gap:14px;align-items:center;color:#fff}
+.team-band .crest{width:96px;flex:none}
+.team-band b{font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1;display:block}
+.team-band span{font-size:13px;opacity:.9}
+.roster{list-style:none;margin:0;padding:6px 18px 16px}
+.roster li{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.roster li:last-child{border-bottom:0}
+.roster .n{font-family:var(--f-num);font-weight:700;color:var(--muted)}
+.roster small{display:block;color:var(--muted);font-size:12.5px}
+.palette{display:flex;gap:6px;padding:0 18px 18px}
+.palette i{width:22px;height:22px;border-radius:6px;border:1px solid var(--line)}
+
+/* Reglamento */
+.rules{display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start}
+@media (max-width:820px){.rules{grid-template-columns:1fr}.toc{display:none}}
+.toc{position:sticky;top:calc(80px + env(safe-area-inset-top,0px));display:grid;gap:2px}
+.toc a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:14px;font-weight:600}
+.toc a:hover{background:var(--surface);color:var(--ink)}
+details.rule{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px}
+details.rule summary{cursor:pointer;list-style:none;padding:14px 18px;display:flex;align-items:center;gap:12px}
+details.rule summary::-webkit-details-marker{display:none}
+details.rule summary h3{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.3px;flex:1}
+details.rule summary .chev{transition:transform .2s;color:var(--muted)}
+details.rule[open] summary .chev{transform:rotate(180deg)}
+.rule-body{padding:0 18px 16px;max-width:72ch}
+.rule-body ol,.rule-body ul{margin:6px 0;padding-left:22px}
+.rule-body li{margin:5px 0}
+.rule-body p{margin:8px 0}
+.callout{background:var(--surface-2);border-left:4px solid var(--clay);padding:10px 14px;border-radius:0 10px 10px 0;margin:10px 0}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media (max-width:620px){.facts{grid-template-columns:repeat(2,1fr)}}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.fact b{font-family:var(--f-display);font-weight:400;font-size:34px;line-height:1;display:block}
+.fact span{font-size:13px;color:var(--muted)}
+
+/* Evidencias */
+.up{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.up{grid-template-columns:1fr}}
+.field{display:grid;gap:5px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;font-weight:600}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--surface-2);border-radius:10px;padding:9px 11px;min-width:0}
+.field textarea{min-height:70px;resize:vertical}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:18px;text-align:center;cursor:pointer;background:var(--surface-2)}
+.drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface-2))}
+.drop b{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{appearance:none;border:1px solid var(--line);background:var(--surface);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.ev{overflow:hidden;display:flex;flex-direction:column}
+.ev .media{aspect-ratio:4/3;background:var(--surface-2);display:grid;place-items:center;overflow:hidden;max-width:100%;border:0;padding:0;cursor:pointer;width:100%}
+.ev .media img,.ev .media video{width:100%;height:100%;object-fit:cover;display:block}
+.ev .media .ph{color:var(--muted);font-size:13px;display:grid;gap:6px;place-items:center;padding:10px;text-align:center}
+.ev .body{padding:12px 14px;display:grid;gap:6px;flex:1}
+.ev .tag{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ev p{margin:0;font-size:14px;overflow-wrap:anywhere}
+.ev .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.empty{border:1px dashed var(--line);border-radius:var(--r);padding:28px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.note{font-size:13px;color:var(--muted)}
+.status-msg{font-size:14px;font-weight:600;margin-top:8px}
+.status-msg.err{color:var(--bad)} .status-msg.ok{color:var(--ok)}
+.progress{height:6px;border-radius:999px;background:var(--line);overflow:hidden;margin-top:8px}
+.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(4,10,25,.62);display:grid;place-items:center;z-index:50;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--surface);border-radius:16px;max-width:640px;width:100%;max-height:100%;overflow:auto;padding:20px;border:1px solid var(--line)}
+.sheet h3{font-family:var(--f-display);font-weight:400;font-size:26px}
+.inn{overflow-x:auto}
+.inn table{border-collapse:collapse;min-width:440px;width:100%}
+.inn th{font-size:12px;color:var(--muted);font-weight:600;padding:4px}
+.inn td{padding:3px}
+.inn td:first-child{font-weight:600;font-size:13.5px;white-space:nowrap;padding-right:8px}
+.inn input{width:100%;min-width:38px;text-align:center;border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:8px 2px;font-family:var(--f-num);font-size:17px;font-weight:600}
+.row-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap}
+.lightbox{position:fixed;inset:0;background:rgba(2,6,16,.9);z-index:60;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lightbox img,.lightbox video{max-width:100%;max-height:82vh;border-radius:10px}
+.lightbox .cap{color:#EAF0FB;margin-top:10px;text-align:center;max-width:60ch}
+.lightbox .x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));background:#fff;color:#0B1630;border:0;border-radius:999px;width:40px;height:40px;font-size:22px;cursor:pointer}
+footer{color:var(--muted);font-size:13px;padding-block:30px}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" data-go="inicio"><b>KICKBALL</b><span>Interescuelas UTB</span></a>
+    <button class="edit-btn" id="editBtn" type="button"></button>
+  </div>
+</header>
+
+<div class="hero" id="hero">
+  <div class="diamond" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Centro Deportivo y Cultural · 2026-2</div>
+      <h1>Torneo Interescuelas de <em>Kickball</em></h1>
+      <p>EIAD, ENLS y ETD se enfrentan en seis partidos de ida y vuelta. Los dos primeros juegan la final el martes 3 de noviembre.</p>
+      <div class="crest-row live" id="heroCrests" aria-label="Equipos"></div>
+    </div>
+    <div>
+      <div class="cascade" id="cascade" role="region" aria-roledescription="carrusel" aria-label="Programación de partidos"></div>
+      <div class="cascade-bar"><div class="cascade-ctl" id="cascadeCtl" aria-label="Elegir partido"></div>
+        <div class="arrows"><button type="button" id="slPrev" aria-label="Partido anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 6-6 6 6 6"/></svg></button><button type="button" id="slNext" aria-label="Partido siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg></button></div></div>
+    </div>
+  </div>
+</div>
+
+<nav class="menu" aria-label="Secciones"><div class="wrap"><div class="tabs" id="tabs"></div></div></nav>
+
+<main>
+  <section id="s-inicio" class="on">
+    <div class="wrap">
+      <div id="champSlot"></div>
+      <div class="grid-2" style="margin-top:22px">
+        <div class="stack">
+          <div id="nextSlot"></div>
+          <div class="card card-pad">
+            <div class="sec-head" style="margin:0 0 6px"><h3 class="label">Últimos resultados</h3><button class="btn small" data-go="partidos">Ver calendario</button></div>
+            <div id="recentSlot" class="list-results"></div>
+          </div>
+        </div>
+        <div class="card card-pad">
+          <div class="sec-head" style="margin:0 0 8px"><h3 class="label">Tabla de posiciones</h3><button class="btn small" data-go="tabla">Detalle</button></div>
+          <div class="standings mini" id="miniTable"></div>
+          <div class="legend"><span><i></i>Clasifican a la final</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s-partidos">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Partidos y resultados</h2><p>Seis entradas por partido. El marcador muestra las carreras de cada entrada.</p></div></div>
+      <div id="fixture"></div>
+    </div>
+  </section>
+
+  <section id="s-tabla">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Tabla de posiciones</h2><p>Victoria 3 puntos, empate 1, derrota 0. Si hay empate en puntos, decide la diferencia de carreras.</p></div></div>
+      <div class="card"><div class="standings" id="fullTable"></div></div>
+      <div class="legend"><span><i></i>Primer y segundo lugar juegan la final (partido 7)</span><span>PJ jugados · PG ganados · PE empatados · PP perdidos · CA carreras a favor · CC en contra · DIF diferencia</span></div>
+    </div>
+  </section>
+
+  <section id="s-evidencias">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Evidencias</h2><p>Fotos, videos, planillas y line ups de cada partido. Todo queda guardado para el informe del torneo.</p></div></div>
+      <div class="card card-pad" id="uploadCard">
+        <form id="upForm" class="up" novalidate>
+          <div class="field"><label for="upMatch">Partido</label><select id="upMatch"></select></div>
+          <div class="field"><label for="upTeam">Equipo (opcional)</label><select id="upTeam"></select></div>
+          <div class="field full"><label for="upNote">Descripción</label><textarea id="upNote" maxlength="400" placeholder="Ej.: Line up de EIAD, planilla firmada, foto del equipo…"></textarea></div>
+          <div class="field full">
+            <label for="upFile">Archivo</label>
+            <div class="drop" id="drop" tabindex="0" role="button" aria-describedby="dropHelp"><b id="dropTitle">Toca para elegir o arrastra aquí</b><span class="note" id="dropHelp">Fotos (JPG, PNG, WEBP), videos MP4 o PDF · hasta 20 MB</span></div>
+            <input type="file" id="upFile" accept="image/*,video/mp4,video/webm,application/pdf" multiple hidden>
+          </div>
+          <div class="field full" style="display:flex;flex-direction:row;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="btn primary" id="upBtn" type="submit">Subir evidencia</button>
+            <span class="note" id="upHint"></span>
+          </div>
+          <div class="field full"><div class="progress" id="upProg" hidden><i></i></div><div class="status-msg" id="upMsg" role="status"></div></div>
+        </form>
+      </div>
+      <div class="card card-pad" id="uploadLocked" hidden>
+        <b>Para subir evidencias, ingresa con tu usuario y clave desde el botón Editar.</b>
+        <p class="note" style="margin:6px 0 0">Si eres delegada y no tienes usuario, pídelo a la organización del torneo. Las evidencias se pueden ver sin ingresar.</p>
+      </div>
+      <div style="margin-top:22px">
+        <div class="chips" id="evFilter" role="group" aria-label="Filtrar evidencias"></div>
+        <div class="gallery" id="gallery"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s-equipos">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Equipos</h2><p>Cada Escuela juega con su escudo y sus colores. Nóminas según las planillas de inscripción.</p></div><button class="btn primary" data-dl="all" id="dlAll">Descargar jugadoras inscritas (Excel)</button></div><div class="status-msg" id="dlMsg" role="status"></div>
+      <div class="teams" id="teamsSlot"></div>
+    </div>
+  </section>
+
+  <section id="s-reglamento">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Reglamento</h2><p>Reglas del Torneo Interescuelas de Kickball UTB.</p></div></div>
+      <div class="facts">
+        <div class="fact"><b>9</b><span>jugadoras en el campo</span></div>
+        <div class="fact"><b>6</b><span>entradas por partido</span></div>
+        <div class="fact"><b>3</b><span>outs por media entrada</span></div>
+        <div class="fact"><b>15'</b><span>de tolerancia antes del W.O.</span></div>
+      </div>
+      <div class="rules">
+        <nav class="toc" id="toc" aria-label="Índice del reglamento"></nav>
+        <div id="rulesSlot"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="wrap">Torneo Interescuelas de Kickball · Centro Deportivo y Cultural · Universidad Tecnológica de Bolívar · Información: <span style="user-select:all">hengonzalez@utb.edu.co</span></footer>
+
+<div id="modalRoot"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+
+<script>
+const LOGOS = {"eiad": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"EIAD \u2013 Escuela de Ingenier\u00eda, Arquitectura y Dise\u00f1o\">\n  \n  <path d=\"M275.9 70.0 L398.5 149.0 L370.1 307.0 L219.0 386.0 L96.4 307.0 L124.9 149.0Z\" fill=\"#1F1428\" opacity=\".9\"/>\n  <path d=\"M264.4 56.0 L387.1 135.0 L236.0 214.0 L113.4 135.0Z\" fill=\"#FF9A80\"/>\n  <path d=\"M113.4 135.0 L236.0 214.0 L207.6 372.0 L84.9 293.0Z\" fill=\"#FF6B4A\"/>\n  <path d=\"M387.1 135.0 L358.6 293.0 L207.6 372.0 L236.0 214.0Z\" fill=\"#D9432A\"/>\n  <g class=\"kb-trail\">\n    <path d=\"M352.0 105.0 L202.0 118.5 L202.0 121.5 L352.0 135.0Z\" fill=\"#1F1428\" opacity=\"1.0\"/>\n    <path d=\"M338.0 148.0 L228.0 156.5 L228.0 159.5 L338.0 168.0Z\" fill=\"#1F1428\" opacity=\"0.75\"/>\n    <path d=\"M366.0 77.0 L276.0 82.5 L276.0 85.5 L366.0 91.0Z\" fill=\"#1F1428\" opacity=\"0.55\"/>\n  </g>\n  <g class=\"kb-ball\">\n    <clipPath id=\"bceiad\"><circle cx=\"392\" cy=\"116\" r=\"62\"/></clipPath>\n    <g clip-path=\"url(#bceiad)\">\n      <circle cx=\"392\" cy=\"116\" r=\"62\" fill=\"#F4B39F\"/>\n      <circle cx=\"379.6\" cy=\"102.4\" r=\"57.0\" fill=\"#FFF4EC\"/>\n    </g>\n    <ellipse cx=\"367.2\" cy=\"88.7\" rx=\"14.9\" ry=\"7.4\" transform=\"rotate(-38 367.2 88.7)\" fill=\"#FFFFFF\" opacity=\".9\"/>\n  </g>\n  <path d=\"M88.0 388.0 L470.0 388.0 L434.0 484.0 L52.0 484.0Z\" fill=\"#FF6B4A\"/>\n  <path d=\"M55.0 492.0 L309.0 492.0 L300.0 502.0 L46.0 502.0Z\" fill=\"#FFF4EC\" class=\"kb-dash\"/>\n  <path d=\"M178.14399999999998 416.956 175.844 430.38800000000003H196.91199999999998L194.796 442.25600000000003H173.72799999999998L171.152 456.7H194.98L192.772 469.12H153.212L164.61999999999998 404.536H204.17999999999998L201.97199999999998 416.956ZM230.12399999999997 404.536 218.71599999999998 469.12H202.98399999999998L214.39199999999997 404.536ZM272.352 457.712H248.24799999999996L242.35999999999996 469.12H225.89199999999997L260.66799999999995 404.536H278.88399999999996L290.84399999999994 469.12H274.19199999999995ZM270.51199999999994 445.752 266.73999999999995 421.832 254.41199999999998 445.752ZM362.3279999999999 430.112Q362.3279999999999 432.78000000000003 361.68399999999997 436.828Q360.02799999999996 446.30400000000003 354.554 453.664Q349.0799999999999 461.024 340.6619999999999 465.072Q332.2439999999999 469.12 322.1239999999999 469.12H297.92799999999994L309.33599999999996 404.536H333.5319999999999Q342.45599999999996 404.536 348.94199999999995 407.71000000000004Q355.42799999999994 410.884 358.87799999999993 416.634Q362.3279999999999 422.384 362.3279999999999 430.112ZM345.67599999999993 436.828Q346.13599999999997 434.068 346.13599999999997 432.228Q346.13599999999997 425.42 341.996 421.694Q337.85599999999994 417.968 330.2199999999999 417.968H322.67599999999993L316.05199999999996 455.688H323.50399999999996Q332.42799999999994 455.688 338.3159999999999 450.72Q344.20399999999995 445.752 345.67599999999993 436.828Z\" fill=\"#FFFFFF\"/>\n</svg>", "enls": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"ENLS \u2013 Escuela de Negocios, Leyes y Sociedad\">\n  \n  <circle cx=\"266\" cy=\"212\" r=\"186\" fill=\"#032541\" opacity=\".9\"/>\n  <circle cx=\"256\" cy=\"200\" r=\"186\" fill=\"#0087FF\"/>\n  <path d=\"M70 200 A186 186 0 0 1 376 58\" fill=\"none\" stroke=\"#7CC4FF\" stroke-width=\"8\" stroke-linecap=\"round\" opacity=\".8\"/>\n  <g class=\"kb-spin\"><path d=\"M256.0 114.0 Q264.9 73.3 318.9 44.2 L340.0 54.5 Q315.6 87.9 276.8 116.6Z\" fill=\"#FFFFFF\"/><path d=\"M306.5 130.4 Q337.6 102.7 398.5 111.0 L409.5 131.7 Q370.1 144.3 321.9 144.7Z\" fill=\"#032541\"/><path d=\"M337.8 173.4 Q379.2 169.3 423.6 211.7 L420.3 234.9 Q381.1 222.1 341.8 194.0Z\" fill=\"#FFFFFF\"/><path d=\"M337.8 226.6 Q373.8 247.6 384.7 308.0 L368.4 324.8 Q344.2 291.4 328.9 245.6Z\" fill=\"#032541\"/><path d=\"M306.5 269.6 Q323.3 307.7 296.6 363.0 L273.6 367.1 Q273.7 325.8 288.2 279.7Z\" fill=\"#FFFFFF\"/><path d=\"M256.0 286.0 Q247.1 326.7 193.1 355.8 L172.0 345.5 Q196.4 312.1 235.2 283.4Z\" fill=\"#032541\"/><path d=\"M205.5 269.6 Q174.4 297.3 113.5 289.0 L102.5 268.3 Q141.9 255.7 190.1 255.3Z\" fill=\"#FFFFFF\"/><path d=\"M174.2 226.6 Q132.8 230.7 88.4 188.3 L91.7 165.1 Q130.9 177.9 170.2 206.0Z\" fill=\"#032541\"/><path d=\"M174.2 173.4 Q138.2 152.4 127.3 92.0 L143.6 75.2 Q167.8 108.6 183.1 154.4Z\" fill=\"#FFFFFF\"/><path d=\"M205.5 130.4 Q188.7 92.3 215.4 37.0 L238.4 32.9 Q238.3 74.2 223.8 120.3Z\" fill=\"#032541\"/></g>\n  <g class=\"kb-ball\">\n    <clipPath id=\"bcenls\"><circle cx=\"256\" cy=\"200\" r=\"70\"/></clipPath>\n    <g clip-path=\"url(#bcenls)\">\n      <circle cx=\"256\" cy=\"200\" r=\"70\" fill=\"#A9D5FF\"/>\n      <circle cx=\"242.0\" cy=\"184.6\" r=\"64.4\" fill=\"#FFFFFF\"/>\n    </g>\n    <ellipse cx=\"228.0\" cy=\"169.2\" rx=\"16.8\" ry=\"8.4\" transform=\"rotate(-38 228.0 169.2)\" fill=\"#FFFFFF\" opacity=\".9\"/>\n  </g>\n  <path d=\"M88.0 388.0 L470.0 388.0 L434.0 484.0 L52.0 484.0Z\" fill=\"#0087FF\"/>\n  <path d=\"M55.0 492.0 L309.0 492.0 L300.0 502.0 L46.0 502.0Z\" fill=\"#7CC4FF\" class=\"kb-dash\"/>\n  <path d=\"M173.912 416.956 171.61200000000002 430.38800000000003H192.68L190.56400000000002 442.25600000000003H169.496L166.92000000000002 456.7H190.74800000000002L188.54000000000002 469.12H148.98000000000002L160.388 404.536H199.948L197.74 416.956ZM256.528 469.12H240.796L221.568 429.284L214.484 469.12H198.752L210.16 404.536H225.892L245.12 444.556L252.204 404.536H267.93600000000004ZM285.784 457.16H306.392L304.27599999999995 469.12H267.936L279.344 404.536H295.07599999999996ZM313.844 452.284Q313.844 451.456 314.028 449.8H330.404Q330.128 453.296 332.06 455.32Q333.992 457.344 337.948 457.344Q341.536 457.344 343.606 455.78Q345.676 454.216 345.676 451.36400000000003Q345.676 448.42 343.054 446.58000000000004Q340.432 444.74 334.912 442.44Q329.576 440.232 326.218 438.254Q322.86 436.276 320.376 432.872Q317.892 429.468 317.892 424.31600000000003Q317.8 417.968 321.02 413.276Q324.24 408.584 329.94399999999996 406.1Q335.64799999999997 403.616 343.008 403.616Q349.632 403.616 354.784 405.68600000000004Q359.936 407.75600000000003 362.788 411.66600000000005Q365.64 415.576 365.64 420.91200000000003Q365.64 422.29200000000003 365.548 422.93600000000004H348.804Q348.896 422.568 348.896 421.832Q348.896 419.25600000000003 347.102 417.646Q345.308 416.036 342.18 416.036Q338.868 416.036 336.798 417.646Q334.728 419.25600000000003 334.728 422.016Q334.728 424.776 337.304 426.66200000000003Q339.88 428.548 345.308 431.032Q350.736 433.516 354.186 435.632Q357.63599999999997 437.748 360.12 441.28999999999996Q362.604 444.832 362.604 449.984Q362.604 455.688 359.568 460.196Q356.532 464.704 350.828 467.23400000000004Q345.124 469.764 337.488 469.764Q327.0 469.764 320.422 465.21000000000004Q313.844 460.656 313.844 452.284Z\" fill=\"#FFFFFF\"/>\n</svg>", "etd": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"ETD \u2013 Escuela de Transformaci\u00f3n Digital\">\n  \n  <g transform=\"skewX(-8) translate(30 0)\">\n    <path d=\"M78 40 H400 Q470 40 470 112 V200 Q470 350 300 372 H78 Z\" fill=\"#2A0870\" transform=\"translate(14 14)\"/>\n    <path d=\"M78 40 H400 Q470 40 470 112 V200 Q470 350 300 372 H78 Z\" fill=\"#5719D3\"/>\n    <path d=\"M400 40 Q470 40 470 112 V200 Q470 350 300 372\" fill=\"none\" stroke=\"#00E5FF\" stroke-width=\"16\"/>\n    <rect x=\"78\" y=\"40\" width=\"150\" height=\"34\" fill=\"#FFFFFF\" opacity=\".95\"/>\n  </g>\n  <path d=\"M352 64 L270 210 H318 L262 336 L380 176 H330 L376 64Z\" fill=\"#00E5FF\" opacity=\".95\"/>\n  <g class=\"kb-trail\"><rect x=\"176\" y=\"150\" width=\"34\" height=\"34\" fill=\"#00E5FF\"/><rect x=\"130\" y=\"132\" width=\"28\" height=\"28\" fill=\"#00E5FF\"/><rect x=\"130\" y=\"176\" width=\"24\" height=\"24\" fill=\"#00E5FF\"/><rect x=\"92\" y=\"156\" width=\"20\" height=\"20\" fill=\"#00E5FF\"/><rect x=\"60\" y=\"120\" width=\"14\" height=\"14\" fill=\"#00E5FF\"/><rect x=\"64\" y=\"190\" width=\"12\" height=\"12\" fill=\"#00E5FF\"/><rect x=\"36\" y=\"160\" width=\"10\" height=\"10\" fill=\"#00E5FF\"/></g>\n  <g class=\"kb-ball\">\n    <clipPath id=\"bcetd\"><circle cx=\"268\" cy=\"196\" r=\"66\"/></clipPath>\n    <g clip-path=\"url(#bcetd)\">\n      <circle cx=\"268\" cy=\"196\" r=\"66\" fill=\"#C7B3FF\"/>\n      <circle cx=\"254.8\" cy=\"181.5\" r=\"60.7\" fill=\"#FFFFFF\"/>\n    </g>\n    <ellipse cx=\"241.6\" cy=\"167.0\" rx=\"15.8\" ry=\"7.9\" transform=\"rotate(-38 241.6 167.0)\" fill=\"#FFFFFF\" opacity=\".9\"/>\n  </g>\n  <path d=\"M88.0 388.0 L470.0 388.0 L434.0 484.0 L52.0 484.0Z\" fill=\"#00E5FF\"/>\n  <path d=\"M55.0 492.0 L309.0 492.0 L300.0 502.0 L46.0 502.0Z\" fill=\"#B79BFF\" class=\"kb-dash\"/>\n  <path d=\"M195.84 416.128 193.44 430.144H215.424L213.216 442.528H191.232L188.544 457.6H213.40800000000002L211.10399999999998 470.56H169.824L181.728 403.168H223.008L220.704 416.128ZM282.144 403.168 279.93600000000004 416.128H261.98400000000004L252.38400000000001 470.56H235.96800000000002L245.568 416.128H227.71200000000002L230.01600000000002 403.168ZM345.696 429.856Q345.696 432.64 345.024 436.86400000000003Q343.296 446.752 337.584 454.432Q331.872 462.112 323.08799999999997 466.336Q314.304 470.56 303.744 470.56H278.496L290.4 403.168H315.648Q324.96 403.168 331.72799999999995 406.48Q338.496 409.79200000000003 342.096 415.79200000000003Q345.696 421.79200000000003 345.696 429.856ZM328.32 436.86400000000003Q328.8 433.984 328.8 432.064Q328.8 424.96 324.48 421.072Q320.15999999999997 417.184 312.192 417.184H304.32L297.408 456.544H305.18399999999997Q314.496 456.544 320.64 451.36Q326.784 446.176 328.32 436.86400000000003Z\" fill=\"#2A0870\"/>\n</svg>"};
+
+const TEAMS = {
+  iad: {id:"iad", nombre:"EIAD", corto:"Ingeniería, Arquitectura y Diseño", escuela:"Escuela de Ingeniería, Arquitectura y Diseño", logo:LOGOS.eiad, color:"var(--t-iad)", band:"#E2492C", pal:["#FF6B4A","#FF9A80","#D9432A","#1F1428","#FFF4EC"],
+    roster:[["Valentina Maza","T00065890","Ingeniería Industrial"],["Yaniber Guerrero","T00083618","Ingeniería Ambiental"],["Melvis Amador","T00097621","Ingeniería Biomédica"],["Marialis Ruiz","T00083985","Ingeniería Industrial"],["Laura Pitalúa","T00067352","Ingeniería Naval"],["Karina Triana","T00098526","Diseño"],["Nataly Cervantes","T00078826","Ingeniería Química"],["Saray Peña","T00097278","Ingeniería Biomédica"],["Dania Sambrano","T00097335","Ingeniería Mecatrónica"]]},
+  nlys: {id:"nlys", nombre:"ENLS", corto:"Negocios, Leyes y Sociedad", escuela:"Escuela de Negocios, Leyes y Sociedad", logo:LOGOS.enls, color:"var(--t-nlys)", band:"#0070D6", pal:["#0087FF","#7CC4FF","#032541","#FFFFFF"],
+    roster:[["Mariana del Carmen Chico Madero","T00091941","Contaduría Pública"],["Lina María Ríos González","T00090447","Finanzas y Negocios Internacionales"],["Natasha Peñate Llamas","T00096602","Finanzas y Negocios Internacionales"],["Valeria López Botero","T00098235","Finanzas y Negocios Internacionales"],["Valentina Yulieth Arias Marín","T00097296","Finanzas y Negocios Internacionales"],["Gabriela Saldarriaga Galvis","T00078914","Finanzas y Negocios Internacionales"],["Valentina Marimón Mogrovejo","T00090055","Contaduría Pública"],["Solanyi Vega Pájaro","T00069326","Finanzas y Negocios Internacionales"],["Yuliana Berrío Bravo","T00078859","Administración de Empresas"],["Jania Melisa Medina Cortés","T00067794","Psicología"],["Gleimis Salgado Salgado","T00070878","Psicología"],["Melany Parodi","T00097012","Finanzas y Negocios Internacionales"]]},
+  td: {id:"td", nombre:"ETD", corto:"Transformación Digital", escuela:"Escuela de Transformación Digital", logo:LOGOS.etd, color:"var(--t-td)", band:"#5719D3", pal:["#5719D3","#2A0870","#00E5FF","#B79BFF"],
+    roster:[["Carolina Giraldo Ciro","T00086537","Marketing y Transformación Digital"],["Dennys Saray Pérez Puello","T00079482","Comunicación Social y Psicología"],["Heraly Margarita Bonilla Garcés","T00077847","Ingeniería Industrial e Ingeniería de Sistemas"],["Hillary Feria Liñán","T00097950","Ciencia de Datos"],["Kiara Carolina Gambín Julio","T00103600","Ingeniería de Sistemas y Computación"],["Stefanny Bohórquez Serrano","T00082695","Comunicación Social"],["Thiffany Torres Aparicio","T00082951","Ingeniería de Sistemas"],["Valentina Medrano Narváez","T00083560","Comunicación Social"],["Valeria Ballesteros Núñez","T00086542","Marketing y Transformación Digital y Comunicación Social"],["Yohanellys Patricia Meléndez Julio","T00083887","Comunicación Social"]]}
+};
+var DL_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>';
+const ORDER = ["iad","nlys","td"];
+
+const MATCHES = [
+  {id:"p1", n:1, fase:"ida", fecha:"2026-10-19", a:"iad", b:"nlys"},
+  {id:"p2", n:2, fase:"ida", fecha:"2026-10-22", a:"nlys", b:"td"},
+  {id:"p3", n:3, fase:"ida", fecha:"2026-10-23", a:"iad", b:"td"},
+  {id:"p4", n:4, fase:"vuelta", fecha:"2026-10-26", a:"nlys", b:"td"},
+  {id:"p5", n:5, fase:"vuelta", fecha:"2026-10-28", a:"iad", b:"nlys"},
+  {id:"p6", n:6, fase:"vuelta", fecha:"2026-10-30", a:"td", b:"iad"},
+  {id:"p7", n:7, fase:"final", fecha:"2026-11-03", a:null, b:null}
+];
+const FASES = {ida:"Primera vuelta · Ida", vuelta:"Segunda vuelta · Regreso", final:"Gran final"};
+const INN = 6;
+
+const RULES = [
+  {id:"equipo", t:"Reglas por equipo", h:`<ol>
+    <li><b>Uniformidad:</b> medias largas y número en la camiseta.</li>
+    <li>Entregar el <b>line up</b> antes de cada partido.</li>
+    <li>Todas las jugadoras inscritas deben jugar.</li>
+    <li>No se permite jugar con accesorios como aretes o cadenas.</li>
+    <li><b>Puntualidad:</b> 15 minutos después de la hora pactada se declara W.O. (forfeit).</li></ol>`},
+  {id:"basicas", t:"Reglas básicas", h:`<ul>
+    <li><b>Objetivo:</b> anotar más carreras que el rival recorriendo las cuatro bases (primera, segunda, tercera y home) después de patear el balón.</li>
+    <li><b>Equipos:</b> dos equipos con 9 jugadoras dentro del campo.</li>
+    <li><b>Duración:</b> 6 entradas (innings). Los equipos alternan turnos para patear y defender.</li>
+    <li><b>El lanzamiento:</b> la lanzadora (pitcher) presenta y hace rodar la pelota por el suelo atravesando el área de home, a velocidad moderada y sin botes excesivos.</li>
+    <li>3 faltas (fouls) acumuladas al patear cuentan como un out.</li>
+    <li><b>Cajón de pateo:</b> la pateadora debe permanecer dentro del área al golpear el balón con el pie o la pierna. Salirse por completo con ambos pies puede invalidar la jugada.</li></ul>`},
+  {id:"desarrollo", t:"Desarrollo del juego", h:`
+    <p>En cada entrada los dos equipos defienden y patean una vez. El equipo que defiende busca 3 outs; el que patea busca anotar la mayor cantidad de carreras. Los roles cambian al completar los 3 outs.</p>
+    <p>El juego comienza cuando la pitcher hace rodar la pelota hacia home y la pateadora patea dentro de la zona de pateo.</p>
+    <ul>
+    <li>Si el lanzamiento no es correcto, es <b>bola</b>. Con 4 bolas a una misma pateadora, ella avanza a primera base.</li>
+    <li>Si la pateadora comete <b>strike</b>, vuelve a home e intenta de nuevo. Al tercer strike queda eliminada.</li>
+    <li>Con un pateo correcto, la pateadora corre a primera y sus compañeras avanzan a la siguiente base. Si hay tiempo pueden avanzar varias bases.</li>
+    <li>Solo puede haber una jugadora por base y no se puede adelantar a una compañera. Si ocurre, queda eliminada la jugadora que adelanta o alcanza a su compañera.</li></ul>`},
+  {id:"strike", t:"Strike", h:`<p>Es una falta de pateo. Ocurre cuando:</p><ul>
+    <li>No se patea un lanzamiento correcto.</li>
+    <li>Se patea fuera de la zona de pateo.</li>
+    <li>La pelota pateada sale a zona de falta antes de pasar la 1.ª o la 3.ª base.</li>
+    <li>La pelota pateada sale de la cancha por encima de la valla.</li>
+    <li>La pelota toca a la pateadora dentro del cajón de pateo.</li></ul>`},
+  {id:"bola", t:"Bola", h:`<p>Es una falta de lanzamiento. Ocurre cuando:</p><ul>
+    <li>Una jugadora defensiva, incluida la lanzadora, avanza hacia home antes de que la pelota sea pateada.</li>
+    <li>El lanzamiento va fuera de la zona de strike y la pateadora no intenta patearlo.</li>
+    <li>El lanzamiento rebota al pasar por home.</li></ul>`},
+  {id:"outs", t:"Maneras de hacer un out", h:`<p>Tres outs cambian el turno de pateo. Es out cuando la jugadora:</p><ul>
+    <li>Comete 3 strikes.</li>
+    <li>Ve atrapada su pelota al vuelo, o tras tocar la malla perimetral, sin que haya tocado el suelo.</li>
+    <li>Adelanta en la carrera a una compañera que pateó antes.</li>
+    <li>Llega a una base ocupada por una compañera.</li>
+    <li>Está fuera de base cuando la pitcher deposita la pelota en su zona de picheo.</li>
+    <li>Es tocada con la pelota mientras corre hacia una base.</li>
+    <li>Llega a una base donde la defensora ya atrapó la pelota.</li></ul>`},
+  {id:"puntos", t:"Puntuación y campeón", h:`
+    <ul><li><b>Victoria:</b> 3 puntos · <b>Empate:</b> 1 punto · <b>Derrota:</b> 0 puntos.</li></ul>
+    <ol>
+    <li>Se juegan los 6 partidos de ida y vuelta.</li>
+    <li>Se suman los puntos de cada equipo.</li>
+    <li>Los dos equipos con más puntos juegan el séptimo partido (final) el martes 3 de noviembre para definir la campeona del torneo.</li>
+    <li>Si hay empate en puntos, el paso a la final se define por diferencia de carreras anotadas.</li></ol>
+    <div class="callout">El W.O. cuenta como victoria para el equipo presente.</div>`}
+];
+
+const ICONS = {
+  inicio:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 21 12 12 21 3 12Z"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>',
+  partidos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  tabla:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>',
+  evidencias:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  equipos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6Z"/></svg>',
+  reglamento:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3h9l4 4v14H6Z"/><path d="M9 11h7M9 15h7M9 7h3"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>',
+  cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>'
+};
+const TABS = [["inicio","Inicio"],["partidos","Partidos"],["tabla","Posiciones"],["evidencias","Evidencias"],["equipos","Equipos"],["reglamento","Reglamento"]];
+
+const CFG = window.KICKBALL_CONFIG || {};
+const API = {
+  online:false, sb:null,
+  fileUrl(path){ return this.sb ? this.sb.storage.from("evidencias").getPublicUrl(path).data.publicUrl : ""; },
+  async saveResult(id, doc){ const {error} = await this.sb.from("resultados").upsert({id, data:doc, updated_at:new Date().toISOString()}); if(error) throw error; },
+  async upload(blob, type, name){
+    const ext = ({"image/jpeg":"jpg","image/png":"png","image/webp":"webp","image/gif":"gif","video/mp4":"mp4","video/webm":"webm","application/pdf":"pdf"})[type] || "bin";
+    const path = `${new Date().toISOString().slice(0,10)}/${crypto.randomUUID()}.${ext}`;
+    const {error} = await this.sb.storage.from("evidencias").upload(path, blob, {contentType:type, upsert:false});
+    if(error) throw {code: String(error.statusCode||""), message:error.message};
+    return path;
+  },
+  async addEvidence(row){ const {error} = await this.sb.from("evidencias").insert(row); if(error) throw error; },
+  async deleteEvidence(ev){ await this.sb.storage.from("evidencias").remove([ev.asset]); const {error} = await this.sb.from("evidencias").delete().eq("id", ev._id); if(error) throw error; },
+  async signIn(email, password){ const {error} = await this.sb.auth.signInWithPassword({email, password}); if(error) throw error; },
+  async signOut(){ await this.sb.auth.signOut(); },
+  async changePassword(p){ const {error} = await this.sb.auth.updateUser({password:p}); if(error) throw error; }
+};
+/* ---------- estado ---------- */
+const state = { results:{}, evidence:[], db:null, assets:null, user:null, me:null, canEdit:false, auth:false, isOrg:false, email:null, canWrite:null, filter:"all", profiles:{} };
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const DAYS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const MONTHS = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const pd = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const fmtDate = s => { const d = pd(s); return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`; };
+const shortDate = s => { const d = pd(s); return `${d.getDate()} ${MONTHS[d.getMonth()]}`; };
+let _cid = 0;
+const crest = id => { const k = "c" + (++_cid); return `<span class="crest">${TEAMS[id].logo.replace(/(id="|url\(#)(bc[a-z]+)/g, (m,p,i)=>p+i+k)}</span>`; };
+
+function sumRuns(arr){ return (arr||[]).reduce((t,v)=> t + (Number.isFinite(+v) && v!=="" && v!==null ? +v : 0), 0); }
+function resultOf(m){
+  const r = state.results[m.id] || {};
+  const estado = r.estado || "programado";
+  const ra = sumRuns(r.a), rb = sumRuns(r.b);
+  return {...r, estado, ra, rb, done: estado==="finalizado" || estado==="wo"};
+}
+
+/* ---------- tabla ---------- */
+function computeTable(){
+  const t = {};
+  ORDER.forEach(id => t[id] = {id, pj:0,pg:0,pe:0,pp:0,ca:0,cc:0,pts:0});
+  MATCHES.filter(m=>m.fase!=="final").forEach(m=>{
+    const r = resultOf(m); if(!r.done) return;
+    const A=t[m.a], B=t[m.b];
+    A.pj++; B.pj++; A.ca+=r.ra; A.cc+=r.rb; B.ca+=r.rb; B.cc+=r.ra;
+    let win = null;
+    if(r.estado==="wo") win = r.wo || (r.ra>r.rb?m.a:r.rb>r.ra?m.b:null);
+    else win = r.ra>r.rb ? m.a : r.rb>r.ra ? m.b : null;
+    if(win===null){ A.pe++; B.pe++; A.pts++; B.pts++; }
+    else { const W=t[win], L=t[win===m.a?m.b:m.a]; W.pg++; W.pts+=3; L.pp++; }
+  });
+  return Object.values(t).map(x=>({...x, dif:x.ca-x.cc}))
+    .sort((x,y)=> y.pts-x.pts || y.dif-x.dif || y.ca-x.ca || TEAMS[x.id].nombre.localeCompare(TEAMS[y.id].nombre));
+}
+function regularDone(){ return MATCHES.filter(m=>m.fase!=="final").every(m=>resultOf(m).done); }
+function finalTeams(){
+  const tb = computeTable();
+  return {a:tb[0].id, b:tb[1].id, confirmed: regularDone()};
+}
+function teamsOf(m){
+  if(m.fase!=="final") return {a:m.a, b:m.b, confirmed:true};
+  return finalTeams();
+}
+
+function tableHTML(mini){
+  const rows = computeTable();
+  const anyPlayed = rows.some(r=>r.pj>0);
+  const head = mini
+    ? `<tr><th>#</th><th>Equipo</th><th>PJ</th><th>DIF</th><th>PTS</th></tr>`
+    : `<tr><th>#</th><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>CA</th><th>CC</th><th>DIF</th><th>PTS</th></tr>`;
+  const body = rows.map((r,i)=>{
+    const T = TEAMS[r.id]; const dif = (r.dif>0?"+":"")+r.dif;
+    const tm = `<td><div class="tm">${crest(r.id)}<div>${esc(T.nombre)}<small>${esc(T.corto)}</small></div></div></td>`;
+    const cls = i<2 ? ' class="qual"' : '';
+    return mini
+      ? `<tr${cls}><td class="pos">${i+1}</td>${tm}<td>${r.pj}</td><td>${dif}</td><td class="pts">${r.pts}</td></tr>`
+      : `<tr${cls}><td class="pos">${i+1}</td>${tm}<td>${r.pj}</td><td>${r.pg}</td><td>${r.pe}</td><td>${r.pp}</td><td>${r.ca}</td><td>${r.cc}</td><td>${dif}</td><td class="pts">${r.pts}</td></tr>`;
+  }).join("");
+  return `<table>${head}${body}</table>`;
+}
+
+/* ---------- partidos ---------- */
+function statusPill(r){
+  if(r.estado==="finalizado") return `<span class="pill final">Final</span>`;
+  if(r.estado==="en_juego") return `<span class="pill live">En juego</span>`;
+  if(r.estado==="wo") return `<span class="pill wo">W.O.</span>`;
+  return `<span class="pill">Programado</span>`;
+}
+function lineScore(m, r, ta, tb){
+  const a = r.a||[], b = r.b||[];
+  const extra = (a[INN]!==undefined && a[INN]!=="" && a[INN]!==null) || (b[INN]!==undefined && b[INN]!=="" && b[INN]!==null);
+  const cols = INN + (extra?1:0);
+  const cell = v => (v===undefined||v===null||v==="") ? "–" : esc(v);
+  const th = Array.from({length:cols},(_,i)=>`<th>${i<INN?i+1:"E"}</th>`).join("");
+  const row = (id, arr, tot) => `<tr><td><span class="tdot" style="background:${TEAMS[id].color}"></span>${esc(TEAMS[id].nombre)}</td>${Array.from({length:cols},(_,i)=>`<td>${cell(arr[i])}</td>`).join("")}<td class="tot">${tot}</td></tr>`;
+  return `<div class="linescore"><table><tr><th>Entrada</th>${th}<th>C</th></tr>${row(ta,a,r.ra)}${row(tb,b,r.rb)}</table></div>`;
+}
+function sideHTML(id, right, placeholder){
+  if(!id) return `<div class="side${right?" r":""}"><div class="nm"><b>${placeholder}</b></div></div>`;
+  const T = TEAMS[id];
+  return `<div class="side${right?" r":""}">${crest(id)}<div class="nm"><b>${esc(T.nombre)}</b><span>${esc(T.corto)}</span></div></div>`;
+}
+function matchCard(m){
+  const r = resultOf(m);
+  const tm = teamsOf(m);
+  const hasScore = r.estado!=="programado";
+  let mid;
+  if(hasScore){
+    const aw = r.estado==="wo" ? (r.wo===tm.a) : r.ra>r.rb, bw = r.estado==="wo" ? (r.wo===tm.b) : r.rb>r.ra;
+    mid = `<div class="score"><span class="${aw?"win":bw?"lose":""}">${r.ra}</span><span class="dash">–</span><span class="${bw?"win":aw?"lose":""}">${r.rb}</span></div>`;
+  } else mid = `<div class="vs">VS</div>`;
+  const left = tm.confirmed ? sideHTML(tm.a,false) : sideHTML(null,false,"1.º de la tabla");
+  const right = tm.confirmed ? sideHTML(tm.b,true) : sideHTML(null,true,"2.º de la tabla");
+  const provisional = (!tm.confirmed && computeTable().some(x=>x.pj>0)) ? `<span>Hoy irían: ${esc(TEAMS[tm.a].nombre)} y ${esc(TEAMS[tm.b].nombre)}</span>` : "";
+  const meta = `<div class="meta"><span>${ICONS.cal}${fmtDate(m.fecha)}</span><span>${ICONS.clock}${esc(r.hora||"5:00 p. m.")}</span><span>${ICONS.pin}${esc(r.lugar||"Cancha de softbol")}</span>${provisional}</div>`;
+  const edit = state.auth && state.isOrg && API.online ? `<button class="btn small" data-edit="${m.id}">Cargar resultado</button>` : "";
+  const ls = hasScore && r.estado!=="wo" && tm.confirmed ? lineScore(m, r, tm.a, tm.b) : "";
+  const wo = r.estado==="wo" && r.wo ? `<div class="note">W.O. a favor de ${esc(TEAMS[r.wo]?.nombre||"")}.</div>` : "";
+  const nota = r.nota ? `<div class="note">${esc(r.nota)}</div>` : "";
+  return `<article class="card match" id="m-${m.id}">
+    <div class="match-top"><div class="mnum">Partido ${m.n} <small>· ${m.fase==="final"?"Final":m.fase==="ida"?"Ida":"Vuelta"}</small></div><div style="display:flex;gap:8px;align-items:center">${statusPill(r)}${edit}</div></div>
+    <div class="versus">${left}${mid}${right}</div>${ls}${wo}${nota}${meta}</article>`;
+}
+function renderFixture(){
+  let html = "", last = null;
+  MATCHES.forEach(m=>{
+    if(m.fase!==last){ html += `<div class="phase">${FASES[m.fase]}</div><div class="stack" data-phase="${m.fase}">`; }
+    html += matchCard(m);
+    const nx = MATCHES[MATCHES.indexOf(m)+1];
+    if(!nx || nx.fase!==m.fase) html += `</div>`;
+    last = m.fase;
+  });
+  $("#fixture").innerHTML = html;
+}
+
+/* ---------- inicio ---------- */
+function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
+function renderHome(){
+  renderCascade();
+  const next = MATCHES.find(m=>!resultOf(m).done);
+  const slot = $("#nextSlot");
+  if(next){
+    const r = resultOf(next), tm = teamsOf(next);
+    const days = Math.round((pd(next.fecha) - pd(todayStr()))/86400000);
+    const when = r.estado==="en_juego" ? "En juego ahora" : days>1 ? `Faltan ${days} días` : days===1 ? "Mañana" : days===0 ? "Hoy" : "Pendiente";
+    const L = tm.confirmed ? sideHTML(tm.a,false) : sideHTML(null,false,"1.º de la tabla");
+    const R = tm.confirmed ? sideHTML(tm.b,true) : sideHTML(null,true,"2.º de la tabla");
+    const mid = r.estado==="en_juego" ? `<div class="score"><span>${r.ra}</span><span class="dash">–</span><span>${r.rb}</span></div>` : `<div class="vs">VS</div>`;
+    slot.innerHTML = `<div class="card card-pad next"><div class="match-top" style="margin-bottom:12px"><div><div class="label">Próximo partido · Partido ${next.n}</div><div class="countdown">${when}</div></div></div>
+      <div class="versus">${L}${mid}${R}</div>
+      <div class="meta" style="margin-top:12px;color:inherit;opacity:.85"><span>${ICONS.cal}${fmtDate(next.fecha)}</span><span>${ICONS.clock}${esc(r.hora||"5:00 p. m.")}</span><span>${ICONS.pin}${esc(r.lugar||"Cancha de softbol")}</span></div></div>`;
+  } else slot.innerHTML = "";
+  const done = MATCHES.filter(m=>resultOf(m).done).slice(-4).reverse();
+  $("#recentSlot").innerHTML = done.length ? done.map(m=>{
+    const r=resultOf(m), tm=teamsOf(m);
+    return `<div class="rrow"><span class="d">${shortDate(m.fecha)}</span><span class="t r">${esc(TEAMS[tm.a].nombre)} ${crest(tm.a)}</span><span class="sc">${r.ra}–${r.rb}</span><span class="t">${crest(tm.b)} ${esc(TEAMS[tm.b].nombre)}</span></div>`;
+  }).join("") : `<div class="empty" style="padding:18px"><b>Aún no hay resultados</b>El primer partido es el ${fmtDate(MATCHES[0].fecha)}: EIAD contra ENLS.</div>`;
+  $("#miniTable").innerHTML = tableHTML(true);
+  const f = MATCHES[6], fr = resultOf(f);
+  if(fr.done){
+    const tm = teamsOf(f);
+    const champ = fr.estado==="wo" ? fr.wo : fr.ra>fr.rb ? tm.a : fr.rb>fr.ra ? tm.b : null;
+    $("#champSlot").innerHTML = champ ? `<div class="champ">${crest(champ)}<div><span class="label" style="color:inherit">Campeonas 2026-2</span><b>${esc(TEAMS[champ].nombre)}</b><span>${esc(TEAMS[champ].escuela)}</span></div></div>` : "";
+  } else $("#champSlot").innerHTML = "";
+}
+
+/* ---------- equipos y reglamento ---------- */
+function renderTeams(){
+  $("#teamsSlot").innerHTML = ORDER.map(id=>{
+    const T = TEAMS[id];
+    return `<article class="card team-card"><div class="team-band" style="background:${T.band}">${crest(id)}<div><b>${esc(T.nombre)}</b><span>${esc(T.escuela)}</span></div></div>
+      <div class="label" style="padding:14px 18px 0">Nómina · ${T.roster.length} jugadoras</div>
+      <ol class="roster">${T.roster.map((p,i)=>`<li><span class="n">${String(i+1).padStart(2,"0")}</span><div>${esc(p[0])}<small><span class="num">${esc(p[1])}</span> · ${esc(p[2])}</small></div></li>`).join("")}</ol>
+      <div style="padding:0 18px 14px"><button class="btn small" data-dl="${id}">${DL_ICON}Descargar nómina (Excel)</button></div>
+      <div class="palette" aria-label="Colores del equipo">${T.pal.map(c=>`<i style="background:${c}" title="${c}"></i>`).join("")}</div></article>`;
+  }).join("");
+}
+function renderRules(){
+  $("#toc").innerHTML = RULES.map(r=>`<a href="#reglamento" data-rule="${r.id}">${esc(r.t)}</a>`).join("");
+  $("#rulesSlot").innerHTML = RULES.map((r,i)=>`<details class="rule" id="r-${r.id}"${i<2?" open":""}><summary><h3>${esc(r.t)}</h3><svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></summary><div class="rule-body">${r.h}</div></details>`).join("");
+  $("#toc").addEventListener("click", e=>{
+    const a = e.target.closest("[data-rule]"); if(!a) return; e.preventDefault();
+    const d = document.getElementById("r-"+a.dataset.rule); d.open = true; d.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+}
+
+/* ---------- navegación ---------- */
+function renderTabs(){
+  $("#tabs").innerHTML = TABS.map(([id,l])=>`<button class="tab" data-go="${id}">${ICONS[id]}<span>${l}</span></button>`).join("");
+}
+function go(id, push){
+  if(!TABS.some(t=>t[0]===id)) id = "inicio";
+  document.querySelectorAll("main section").forEach(s=>s.classList.toggle("on", s.id==="s-"+id));
+  document.querySelectorAll(".tab").forEach(t=>{ if(t.dataset.go===id) t.setAttribute("aria-current","page"); else t.removeAttribute("aria-current"); });
+  const at = document.querySelector(`.tab[data-go="${id}"]`); if(at && at.scrollIntoView) at.scrollIntoView({block:"nearest", inline:"center"});
+  $("#hero").hidden = id!=="inicio";
+  if(push){ try{ history.replaceState(null,"","#"+id); }catch(e){} window.scrollTo({top:0}); }
+  try{ localStorage.setItem("kb-tab", id); }catch(e){}
+}
+document.addEventListener("click", e=>{
+  const g = e.target.closest("[data-go]"); if(g){ e.preventDefault(); go(g.dataset.go, true); return; }
+  const ed = e.target.closest("[data-edit]"); if(ed){ openEditor(ed.dataset.edit); return; }
+});
+window.addEventListener("hashchange", ()=>go(location.hash.slice(1)));
+
+/* ---------- editor de resultados (organizador) ---------- */
+function openEditor(mid){
+  const m = MATCHES.find(x=>x.id===mid), r = state.results[mid] || {}, tm = teamsOf(m);
+  if(!tm.confirmed && m.fase==="final"){ /* se permite cargar la final con los líderes actuales */ }
+  const inRow = (id,arr,key) => `<tr><td>${esc(TEAMS[id].nombre)}</td>${Array.from({length:INN+1},(_,i)=>`<td><input id="in-${key}-${i}" inputmode="numeric" type="number" min="0" max="99" value="${arr && arr[i]!==undefined && arr[i]!==null ? esc(arr[i]) : ""}" aria-label="${esc(TEAMS[id].nombre)} entrada ${i<INN?i+1:"extra"}"></td>`).join("")}</tr>`;
+  $("#modalRoot").innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="edT"><div class="sheet">
+    <div class="label">Partido ${m.n} · ${fmtDate(m.fecha)}</div><h3 id="edT">${esc(TEAMS[tm.a].nombre)} vs ${esc(TEAMS[tm.b].nombre)}</h3>
+    ${m.fase==="final" && !tm.confirmed ? `<p class="note">La fase regular aún no termina; la final se carga con los dos primeros de la tabla actual.</p>` : ""}
+    <div class="up" style="margin-top:14px">
+      <div class="field"><label for="edEstado">Estado</label><select id="edEstado">
+        <option value="programado">Programado</option><option value="en_juego">En juego</option><option value="finalizado">Finalizado</option><option value="wo">W.O. (no se presentó un equipo)</option></select></div>
+      <div class="field" id="woWrap"><label for="edWo">Ganador por W.O.</label><select id="edWo"><option value="${tm.a}">${esc(TEAMS[tm.a].nombre)}</option><option value="${tm.b}">${esc(TEAMS[tm.b].nombre)}</option></select></div>
+      <div class="field"><label for="edHora">Hora</label><input id="edHora" placeholder="5:00 p. m." value="${esc(r.hora||"")}"></div>
+      <div class="field"><label for="edLugar">Lugar</label><input id="edLugar" placeholder="Cancha de softbol" value="${esc(r.lugar||"")}"></div>
+      <div class="field full"><label>Carreras por entrada</label><div class="inn"><table><tr><th></th>${Array.from({length:INN},(_,i)=>`<th>${i+1}</th>`).join("")}<th>Extra</th></tr>${inRow(tm.a,r.a,"a")}${inRow(tm.b,r.b,"b")}</table></div></div>
+      <div class="field full"><label for="edNota">Nota (opcional)</label><input id="edNota" maxlength="200" placeholder="Ej.: Jugadora destacada, incidencias…" value="${esc(r.nota||"")}"></div>
+    </div>
+    <div class="status-msg" id="edMsg" role="status"></div>
+    <div class="row-actions"><button class="btn" id="edCancel">Cancelar</button><button class="btn primary" id="edSave">Guardar</button></div>
+  </div></div>`;
+  const sel = $("#edEstado"); sel.value = r.estado || "programado";
+  if(r.wo) $("#edWo").value = r.wo;
+  const syncWo = ()=> $("#woWrap").hidden = sel.value!=="wo"; syncWo(); sel.addEventListener("change", syncWo);
+  $("#edCancel").onclick = closeModal;
+  $(".modal").addEventListener("click", e=>{ if(e.target.classList.contains("modal")) closeModal(); });
+  $("#edSave").onclick = async ()=>{
+    const read = k => Array.from({length:INN+1},(_,i)=>{ const v=$(`#in-${k}-${i}`).value.trim(); return v===""?null:Math.max(0,Math.floor(+v)); });
+    const doc = { estado: sel.value, a: read("a"), b: read("b"), hora: $("#edHora").value.trim(), lugar: $("#edLugar").value.trim(), nota: $("#edNota").value.trim(), equipos:[tm.a, tm.b], actualizado: new Date().toISOString() };
+    if(sel.value==="wo") doc.wo = $("#edWo").value;
+    const btn = $("#edSave"); btn.disabled = true; $("#edMsg").textContent = "Guardando…"; $("#edMsg").className="status-msg";
+    try{ await API.saveResult(mid, doc); state.results[mid] = doc; renderAll(); closeModal(); }
+    catch(err){ btn.disabled=false; $("#edMsg").className="status-msg err"; $("#edMsg").textContent = err && err.code==="42501" ? "Tu usuario no está registrado como organizador. Agrégalo en la tabla organizadores de Supabase." : "No se pudo guardar. Revisa la conexión e intenta de nuevo."; }
+  };
+  document.addEventListener("keydown", escClose);
+}
+function escClose(e){ if(e.key==="Escape") closeModal(); }
+function closeModal(){ $("#modalRoot").innerHTML=""; document.removeEventListener("keydown", escClose); }
+
+/* ---------- evidencias ---------- */
+function matchLabel(id){
+  if(id==="general") return "General";
+  const m = MATCHES.find(x=>x.id===id); if(!m) return "";
+  const tm = teamsOf(m);
+  return m.fase==="final" ? `P${m.n} · Final` : `P${m.n} · ${TEAMS[tm.a].nombre} vs ${TEAMS[tm.b].nombre}`;
+}
+function renderUploadSelects(){
+  const keepM = $("#upMatch").value, keepT = $("#upTeam").value;
+  $("#upMatch").innerHTML = MATCHES.map(m=>`<option value="${m.id}">${esc(matchLabel(m.id))} · ${shortDate(m.fecha)}</option>`).join("") + `<option value="general">General del torneo</option>`;
+  const nxt = MATCHES.find(m=>m.fecha>=todayStr()) || MATCHES[0];
+  const past = [...MATCHES].reverse().find(m=>m.fecha<=todayStr());
+  $("#upMatch").value = keepM || (past||nxt).id;
+  $("#upTeam").innerHTML = `<option value="">Sin equipo específico</option>` + ORDER.map(id=>`<option value="${id}">${esc(TEAMS[id].nombre)} · ${esc(TEAMS[id].corto)}</option>`).join("");
+  $("#upTeam").value = keepT || "";
+}
+function renderFilter(){
+  const counts = {}; state.evidence.forEach(e=>counts[e.partido]=(counts[e.partido]||0)+1);
+  const opts = [["all",`Todas (${state.evidence.length})`], ...MATCHES.map(m=>[m.id,`Partido ${m.n}${counts[m.id]?` (${counts[m.id]})`:""}`]), ["general",`General${counts.general?` (${counts.general})`:""}`]];
+  $("#evFilter").innerHTML = opts.map(([v,l])=>`<button class="chip" data-f="${v}" aria-pressed="${state.filter===v}">${esc(l)}</button>`).join("");
+}
+$("#evFilter").addEventListener("click", e=>{ const c=e.target.closest("[data-f]"); if(!c) return; state.filter=c.dataset.f; renderFilter(); renderGallery(); });
+
+async function renderGallery(){
+  const list = state.evidence.filter(e=>state.filter==="all"||e.partido===state.filter);
+  const g = $("#gallery");
+  if(!API.online){ g.innerHTML = `<div class="empty" style="grid-column:1/-1"><b>Las evidencias se activan al conectar la base de datos del torneo</b>Mientras tanto puedes consultar el calendario, la tabla y los equipos.</div>`; return; }
+  if(!list.length){ g.innerHTML = `<div class="empty" style="grid-column:1/-1"><b>${state.evidence.length?"No hay evidencias para este filtro":"Todavía no hay evidencias"}</b>Sube la primera foto, video o planilla con el formulario de arriba.</div>`; return; }
+  g.innerHTML = list.map(e=>{
+    const src = API.fileUrl(e.asset);
+    const t = e.tipo||"";
+    const media = t.startsWith("image/") ? `<img src="${src}" alt="${esc(e.nota||"Evidencia")}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'Imagen no disponible'}))">`
+      : t.startsWith("video/") ? `<video src="${src}" muted playsinline preload="metadata"></video>`
+      : `<span class="ph">${ICONS.reglamento.replace("<svg",'<svg width="38" height="38"')}<span>${esc(e.nombre||"Documento PDF")}</span></span>`;
+    const who = e.autor ? String(e.autor).split("@")[0] : "Organización";
+    const can = state.auth && (state.isOrg || (state.email && e.autor===state.email));
+    const team = e.equipo && TEAMS[e.equipo] ? ` · ${esc(TEAMS[e.equipo].nombre)}` : "";
+    const d = e.creado ? new Date(e.creado) : null;
+    return `<article class="card ev"><button class="media" data-open="${esc(e._id)}" aria-label="Ver evidencia">${media}</button>
+      <div class="body"><div class="tag">${esc(matchLabel(e.partido))}${team}</div>${e.nota?`<p>${esc(e.nota)}</p>`:""}
+      <div class="foot"><span>${esc(who)}${d?` · ${d.getDate()} ${MONTHS[d.getMonth()]}`:""}</span>${can?`<button class="btn small danger" data-del="${esc(e._id)}">Eliminar</button>`:""}</div></div></article>`;
+  }).join("");
+}
+$("#gallery").addEventListener("click", async e=>{
+  const o = e.target.closest("[data-open]");
+  if(o){ const ev = state.evidence.find(x=>x._id===o.dataset.open); if(ev) openLightbox(ev); return; }
+  const d = e.target.closest("[data-del]");
+  if(d){
+    if(d.dataset.armed!=="1"){ d.dataset.armed="1"; d.textContent="¿Confirmar?"; setTimeout(()=>{ if(d.isConnected){ d.dataset.armed=""; d.textContent="Eliminar"; } },4000); return; }
+    d.disabled = true; d.textContent = "Eliminando…";
+    const ev = state.evidence.find(x=>x._id===d.dataset.del);
+    try{
+      await API.deleteEvidence(ev); await refreshEvidence();
+    }catch(err){ d.disabled=false; d.textContent="No se pudo eliminar"; }
+  }
+});
+function openLightbox(ev){
+  const src = API.fileUrl(ev.asset), t = ev.tipo||"";
+  const media = t.startsWith("image/") ? `<img src="${src}" alt="${esc(ev.nota||"Evidencia")}">` : t.startsWith("video/") ? `<video src="${src}" controls playsinline autoplay></video>` : `<a class="btn" href="${src}" target="_blank" rel="noopener">Abrir ${esc(ev.nombre||"PDF")}</a>`;
+  $("#modalRoot").innerHTML = `<div class="lightbox" role="dialog" aria-modal="true" aria-label="Evidencia"><button class="x" aria-label="Cerrar">×</button><div style="display:grid;justify-items:center">${media}<div class="cap">${esc(matchLabel(ev.partido))}${ev.nota?` — ${esc(ev.nota)}`:""}</div></div></div>`;
+  $(".lightbox").addEventListener("click", e=>{ if(e.target.classList.contains("lightbox")||e.target.classList.contains("x")) closeModal(); });
+  document.addEventListener("keydown", escClose);
+}
+
+/* subida */
+const OK_TYPES = ["image/png","image/jpeg","image/webp","image/gif","video/mp4","video/webm","application/pdf"];
+let pending = [];
+function setFiles(files){
+  pending = Array.from(files||[]);
+  $("#dropTitle").textContent = pending.length ? pending.map(f=>f.name).join(", ") : "Toca para elegir o arrastra aquí";
+}
+const drop = $("#drop"), fileIn = $("#upFile");
+drop.addEventListener("click", ()=>fileIn.click());
+drop.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fileIn.click(); }});
+fileIn.addEventListener("change", ()=>setFiles(fileIn.files));
+["dragenter","dragover"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add("over");}));
+["dragleave","drop"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove("over");}));
+drop.addEventListener("drop", e=>setFiles(e.dataTransfer.files));
+
+async function prepare(file){
+  const t = file.type || "";
+  if(t==="video/quicktime" || /\.mov$/i.test(file.name)) throw new Error("Los videos .MOV no se pueden subir. Expórtalo como MP4 e intenta de nuevo.");
+  if(t.startsWith("image/") && (!OK_TYPES.includes(t) || file.size > 4*1024*1024)){
+    try{
+      const bmp = await createImageBitmap(file);
+      const k = Math.min(1, 2400/Math.max(bmp.width,bmp.height));
+      const c = document.createElement("canvas"); c.width=Math.round(bmp.width*k); c.height=Math.round(bmp.height*k);
+      c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+      const blob = await new Promise(r=>c.toBlob(r,"image/jpeg",0.86));
+      if(blob) return {blob, type:"image/jpeg"};
+    }catch(e){ if(!OK_TYPES.includes(t)) throw new Error(`No se pudo leer ${file.name}. Usa una foto JPG o PNG.`); }
+  }
+  if(!OK_TYPES.includes(t)) throw new Error(`${file.name}: formato no admitido. Usa JPG, PNG, MP4 o PDF.`);
+  if(file.size > 20*1024*1024) throw new Error(`${file.name} pesa más de 20 MB. Reduce el tamaño e intenta de nuevo.`);
+  return {blob:file, type:t};
+}
+$("#upForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const msg = $("#upMsg"), btn = $("#upBtn"), prog = $("#upProg"), bar = prog.querySelector("i");
+  msg.className = "status-msg"; msg.textContent = "";
+  if(!pending.length){ msg.className="status-msg err"; msg.textContent="Elige al menos un archivo."; return; }
+  if(!API.online || !state.auth){ msg.className="status-msg err"; msg.textContent="Ingresa con tu usuario (botón Editar) para subir evidencias."; return; }
+  btn.disabled = true; prog.hidden = false; bar.style.width = "4%";
+  let ok = 0; const errs = [];
+  for(let i=0;i<pending.length;i++){
+    const f = pending[i];
+    msg.textContent = `Subiendo ${i+1} de ${pending.length}…`;
+    try{
+      const {blob,type} = await prepare(f);
+      const path = await API.upload(blob, type, f.name);
+      await API.addEvidence({ partido:$("#upMatch").value, equipo:$("#upTeam").value||null, nota:$("#upNote").value.trim().slice(0,400), archivo:path, tipo:type, nombre:f.name.slice(0,120), autor:state.email });
+      ok++;
+    }catch(err){
+      const code = err && err.code;
+      errs.push(code==="too_large" ? `${f.name} supera el tamaño permitido.` : code==="unsupported_type" ? `${f.name}: formato no admitido.` : code==="413" ? "El archivo supera el tamaño permitido." : code==="rate_limited" ? "Demasiadas subidas seguidas; espera un momento." : (err && err.message && !code) ? err.message : `${f.name} no se pudo subir.`);
+    }
+    bar.style.width = `${Math.round((i+1)/pending.length*100)}%`;
+  }
+  btn.disabled = false; setTimeout(()=>{prog.hidden=true; bar.style.width="0";},800);
+  if(ok){ setFiles([]); fileIn.value=""; $("#upNote").value=""; refreshEvidence(); }
+  msg.className = "status-msg " + (errs.length ? "err" : "ok");
+  msg.textContent = (ok ? `Listo: ${ok} ${ok===1?"evidencia subida":"evidencias subidas"}. ` : "") + errs.join(" ");
+});
+
+
+/* ---------- cascada de la programación ---------- */
+const CS = { k:0, last:-1, timer:null, paused:false, prev:{} };
+const DOW = ["DOM","LUN","MAR","MIÉ","JUE","VIE","SÁB"];
+function cardDate(s){ const d=pd(s); return `${DOW[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()].toUpperCase()}`; }
+function renderCascade(){
+  const box = $("#cascade"); if(!box) return;
+  box.innerHTML = MATCHES.map(m=>{
+    const tm = teamsOf(m), r = resultOf(m);
+    const A = TEAMS[tm.a], B = TEAMS[tm.b];
+    const bg = m.fase==="final" && !tm.confirmed
+      ? `linear-gradient(105deg,#0A1A3F 0 50%,#16337A 50% 100%)`
+      : `linear-gradient(105deg,${A.band} 0 49.6%,${B.band} 50.4% 100%)`;
+    const left = m.fase==="final" && !tm.confirmed ? `<span class="tbd">1.º</span>` : crest(tm.a);
+    const right = m.fase==="final" && !tm.confirmed ? `<span class="tbd">2.º</span>` : crest(tm.b);
+    const v = r.estado!=="programado" ? `${r.ra} – ${r.rb}` : "VS";
+    const k = m.fase==="final" ? "Gran final" : `Partido ${m.n} · ${m.fase==="ida"?"Ida":"Vuelta"}`;
+    const lbl = m.fase==="final" && !tm.confirmed ? "Final: 1.º contra 2.º de la tabla" : `${A.nombre} contra ${B.nombre}`;
+    return `<div class="ccard" data-j="${MATCHES.indexOf(m)}" role="img" aria-label="${esc(k)}, ${esc(lbl)}, ${fmtDate(m.fecha)}">
+      <div class="bg" style="background:${bg}"></div>
+      <div class="bg" style="background:radial-gradient(ellipse 34% 70% at 50% 50%,rgba(4,10,25,.55),transparent 75%),repeating-linear-gradient(105deg,rgba(255,255,255,.07) 0 2px,transparent 2px 16px)"></div>
+      <div class="in"><span class="live">${left}</span><div class="mid"><div class="k">${esc(k)}</div><div class="v num">${v}</div><div class="d">${cardDate(m.fecha)}${` · ${esc(r.hora||"5:00 PM")}`}</div></div><span class="live">${right}</span></div></div>`;
+  }).join("");
+  $("#cascadeCtl").innerHTML = MATCHES.map((m,j)=>`<button type="button" data-cj="${j}" aria-label="Ver partido ${m.n}"></button>`).join("");
+  CS.prev = {};
+  applyCascade(true);
+}
+function applyCascade(noAnim, dir){
+  const n = MATCHES.length;
+  document.querySelectorAll("#cascade .ccard").forEach(c=>{
+    const j = +c.dataset.j, prev = CS.prev[j];
+    let tf, op;
+    if(j===CS.k){ tf = "translateX(0)"; op = 1; }
+    else if(j===CS.last){ tf = dir<0 ? "translateX(100%)" : "translateX(-100%)"; op = 1; }
+    else { tf = dir<0 ? "translateX(-100%)" : "translateX(100%)"; op = 0; }
+    const animate = !noAnim && (j===CS.k || j===CS.last);
+    if(!animate){ c.style.transition = "none"; }
+    c.style.transform = tf; c.style.opacity = op; c.style.zIndex = j===CS.k ? 2 : j===CS.last ? 1 : 0;
+    if(!animate){ void c.offsetWidth; c.style.transition = ""; }
+    c.setAttribute("aria-hidden", String(j!==CS.k));
+  });
+  document.querySelectorAll("#cascadeCtl button").forEach(b=>b.setAttribute("aria-current", String(+b.dataset.cj===CS.k)));
+}
+function slideTo(k, dir){
+  const n = MATCHES.length;
+  k = ((k % n) + n) % n; if(k===CS.k) return;
+  // coloca la entrante del lado correcto antes de animar
+  const inc = document.querySelector(`#cascade .ccard[data-j="${k}"]`);
+  if(inc){ inc.style.transition="none"; inc.style.opacity=1; inc.style.transform = dir<0 ? "translateX(-100%)" : "translateX(100%)"; void inc.offsetWidth; inc.style.transition=""; }
+  CS.last = CS.k; CS.k = k; applyCascade(false, dir);
+}
+function pauseSlider(){ CS.paused = true; clearTimeout(CS.resume); CS.resume = setTimeout(()=>CS.paused=false, 9000); }
+function startCascade(){
+  const nextIdx = MATCHES.findIndex(m=>!resultOf(m).done);
+  CS.k = nextIdx<0 ? MATCHES.length-1 : nextIdx; CS.last = -1;
+  applyCascade(true);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduce) CS.timer = setInterval(()=>{ if(!CS.paused && !document.hidden && !$("#hero").hidden) slideTo(CS.k+1, 1); }, 4000);
+  const box = $("#cascade");
+  box.addEventListener("mouseenter", ()=>CS.paused=true); box.addEventListener("mouseleave", ()=>CS.paused=false);
+  let x0 = null;
+  box.addEventListener("pointerdown", e=>{ x0 = e.clientX; });
+  box.addEventListener("pointerup", e=>{ if(x0===null) return; const dx = e.clientX - x0; x0 = null; if(Math.abs(dx) > 40){ pauseSlider(); slideTo(CS.k + (dx<0?1:-1), dx<0?1:-1); } });
+  $("#slPrev").addEventListener("click", ()=>{ pauseSlider(); slideTo(CS.k-1, -1); });
+  $("#slNext").addEventListener("click", ()=>{ pauseSlider(); slideTo(CS.k+1, 1); });
+}
+$("#cascadeCtl").addEventListener("click", e=>{
+  const b = e.target.closest("[data-cj]"); if(!b) return;
+  const k = +b.dataset.cj; pauseSlider(); slideTo(k, k<CS.k?-1:1);
+});
+window.addEventListener("resize", ()=>applyCascade(true));
+
+/* ---------- acceso de edición (usuario y clave con Supabase Auth) ---------- */
+function restoreAuth(){ renderEditBtn(); }
+function applySession(session){
+  state.auth = !!session; state.email = session?.user?.email?.toLowerCase() || null;
+  renderEditBtn(); syncUploadUI(); renderFixture(); renderGallery();
+}
+function syncUploadUI(){
+  const can = API.online && state.auth;
+  $("#uploadCard").hidden = !can; $("#uploadLocked").hidden = can;
+}
+const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+const PEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16Z"/><path d="m13 7 4 4"/></svg>';
+function renderEditBtn(){
+  const b = $("#editBtn");
+  b.classList.toggle("on", state.auth);
+  b.innerHTML = state.auth ? `${PEN}<span>${state.isOrg ? "Modo edición" : "Sesión iniciada"}</span>` : `${LOCK}<span>Editar</span>`;
+  b.setAttribute("aria-label", state.auth ? "Opciones de sesión" : "Ingresar para editar");
+}
+function sheet(inner){
+  $("#modalRoot").innerHTML = `<div class="modal" role="dialog" aria-modal="true"><div class="sheet" style="max-width:420px">${inner}</div></div>`;
+  $(".modal").addEventListener("click", e=>{ if(e.target.classList.contains("modal")) closeModal(); });
+  document.addEventListener("keydown", escClose);
+  const f = $("#modalRoot input"); if(f) f.focus();
+}
+async function openAuth(){
+  if(!API.online){ sheet(`<h3>Editar</h3><p class="note">Este sitio está en modo consulta: la base de datos del torneo aún no está conectada.</p><div class="row-actions"><button class="btn" id="aClose">Cerrar</button></div>`); $("#aClose").onclick=closeModal; return; }
+  if(state.auth){
+    sheet(`<h3>${state.isOrg?"Modo edición":"Sesión iniciada"}</h3><p class="note" style="margin:6px 0 14px">Usuario: <b>${esc(state.email)}</b>. ${state.isOrg?"Puedes cargar resultados y gestionar evidencias.":"Puedes subir evidencias. Para cargar resultados, tu usuario debe estar registrado como organizador."}</p>
+      <form id="pwForm" class="up" style="grid-template-columns:1fr" novalidate><div class="field"><label for="nPass">Nueva clave (opcional)</label><input id="nPass" type="password" autocomplete="new-password" minlength="8"></div><div class="status-msg" id="pMsg" role="status"></div>
+      <div class="row-actions"><button type="submit" class="btn" id="aChange">Cambiar clave</button><button type="button" class="btn primary" id="aOut">Cerrar sesión</button></div></form>`);
+    $("#aOut").onclick = async ()=>{ await API.signOut(); closeModal(); };
+    $("#pwForm").addEventListener("submit", async e=>{ e.preventDefault(); const p=$("#nPass").value, m=$("#pMsg");
+      if(p.length<8){ m.className="status-msg err"; m.textContent="La clave debe tener al menos 8 caracteres."; return; }
+      try{ await API.changePassword(p); m.className="status-msg ok"; m.textContent="Clave actualizada."; $("#nPass").value=""; }catch(err){ m.className="status-msg err"; m.textContent="No se pudo cambiar la clave."; } });
+    return;
+  }
+  sheet(`<h3>Ingresar para editar</h3><p class="note" style="margin:6px 0 14px">Usa el usuario (correo) y la clave que te asignó la organización del torneo.</p>
+    <form id="credForm" class="up" style="grid-template-columns:1fr" novalidate>
+      <div class="field"><label for="cUser">Usuario (correo)</label><input id="cUser" type="email" autocomplete="username" autocapitalize="none" spellcheck="false"></div>
+      <div class="field"><label for="cPass">Clave</label><input id="cPass" type="password" autocomplete="current-password"></div>
+      <div class="status-msg" id="cMsg" role="status"></div>
+      <div class="row-actions" style="margin-top:4px"><button type="button" class="btn" id="cCancel">Cancelar</button><button class="btn primary" id="cGo" type="submit">Ingresar</button></div>
+    </form>`);
+  $("#cCancel").onclick = closeModal;
+  $("#credForm").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const u = $("#cUser").value.trim().toLowerCase(), p = $("#cPass").value, msg = $("#cMsg"), go = $("#cGo");
+    if(!u || !p){ msg.className="status-msg err"; msg.textContent="Escribe usuario y clave."; return; }
+    go.disabled = true; msg.className="status-msg"; msg.textContent="Verificando…";
+    try{ await API.signIn(u, p); closeModal(); }
+    catch(err){ go.disabled=false; msg.className="status-msg err"; msg.textContent="Usuario o clave incorrectos."; $("#cPass").value=""; $("#cPass").focus(); }
+  });
+}
+$("#editBtn").addEventListener("click", openAuth);
+
+
+/* ---------- descarga de nóminas ---------- */
+var DL_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>';
+function rosterRows(ids){
+  const rows = [];
+  ids.forEach(id=>{ const T = TEAMS[id]; T.roster.forEach((p,i)=>rows.push([i+1, T.nombre, T.escuela, p[0], p[1], p[2]])); });
+  return rows;
+}
+function teamSheet(ids, title){
+  const head = ["N.°","Equipo","Escuela","Nombre completo","Código","Programa"];
+  const aoa = [[title],["Torneo Interescuelas de Kickball UTB · 2026-2"],[], head, ...rosterRows(ids)];
+  const ws = XLSX.utils.aoa_to_sheet(aoa);
+  ws["!cols"] = [{wch:6},{wch:9},{wch:44},{wch:36},{wch:13},{wch:48}];
+  ws["!merges"] = [{s:{r:0,c:0},e:{r:0,c:5}},{s:{r:1,c:0},e:{r:1,c:5}}];
+  ws["!autofilter"] = {ref:`A4:F${aoa.length}`};
+  return ws;
+}
+function downloadRoster(which){
+  const msg = $("#dlMsg"); msg.className = "status-msg"; msg.textContent = "";
+  if(typeof XLSX === "undefined"){ msg.className="status-msg err"; msg.textContent="No se pudo preparar el Excel. Recarga la página e intenta de nuevo."; return; }
+  const wb = XLSX.utils.book_new();
+  let filename;
+  if(which==="all"){
+    XLSX.utils.book_append_sheet(wb, teamSheet(ORDER, "Jugadoras inscritas · Todos los equipos"), "Todas");
+    ORDER.forEach(id=>XLSX.utils.book_append_sheet(wb, teamSheet([id], `Nómina ${TEAMS[id].nombre} · ${TEAMS[id].escuela}`), TEAMS[id].nombre));
+    filename = "Kickball UTB 2026-2 - Jugadoras inscritas.xlsx";
+  } else {
+    XLSX.utils.book_append_sheet(wb, teamSheet([which], `Nómina ${TEAMS[which].nombre} · ${TEAMS[which].escuela}`), TEAMS[which].nombre);
+    filename = `Kickball UTB 2026-2 - Nomina ${TEAMS[which].nombre}.xlsx`;
+  }
+  XLSX.writeFile(wb, filename);
+}
+document.addEventListener("click", e=>{ const b = e.target.closest("[data-dl]"); if(b){ downloadRoster(b.dataset.dl); } });
+
+/* ---------- render global ---------- */
+function renderAll(){ renderHome(); renderFixture(); $("#fullTable").innerHTML = tableHTML(false); renderFilter(); renderGallery(); }
+
+renderTabs(); renderRules(); renderTeams(); renderUploadSelects();
+$("#heroCrests").innerHTML = ORDER.map(crest).join("");
+restoreAuth(); renderAll(); startCascade();
+let start = location.hash.slice(1);
+if(!start){ try{ start = localStorage.getItem("kb-tab")||"inicio"; }catch(e){ start="inicio"; } }
+go(start);
+
+/* ---------- datos: Supabase (o archivo estático en modo consulta) ---------- */
+async function refreshResults(){
+  if(API.online){
+    const {data, error} = await API.sb.from("resultados").select("id,data");
+    if(!error){ const r = {}; data.forEach(x=>r[x.id]=x.data); state.results = r; }
+  } else {
+    try{ const res = await fetch("resultados.json", {cache:"no-store"}); if(res.ok) state.results = await res.json(); }catch(e){}
+  }
+  renderHome(); renderFixture(); $("#fullTable").innerHTML = tableHTML(false); renderUploadSelects();
+}
+async function refreshEvidence(){
+  if(!API.online) return;
+  const {data, error} = await API.sb.from("evidencias").select("*").order("creado",{ascending:false}).limit(500);
+  if(!error){ state.evidence = data.map(x=>({...x, _id:x.id, asset:x.archivo})); renderFilter(); renderGallery(); }
+}
+async function checkOrg(){
+  state.isOrg = false;
+  if(API.online && state.email){
+    const {data} = await API.sb.from("organizadores").select("email").eq("email", state.email).maybeSingle();
+    state.isOrg = !!data;
+  }
+}
+(async ()=>{
+  if(CFG.supabaseUrl && CFG.supabaseAnonKey && window.supabase){
+    API.sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey);
+    API.online = true;
+    const { data:{ session } } = await API.sb.auth.getSession();
+    state.auth = !!session; state.email = session?.user?.email?.toLowerCase() || null;
+    await checkOrg(); applySession(session);
+    API.sb.auth.onAuthStateChange(async (_e, sess)=>{ state.email = sess?.user?.email?.toLowerCase() || null; await checkOrg(); applySession(sess); });
+  }
+  syncUploadUI();
+  await refreshResults(); await refreshEvidence();
+  setInterval(()=>{ if(!document.hidden){ refreshResults(); refreshEvidence(); } }, 30000);
+})();
+</script>
+</body>
+</html>
