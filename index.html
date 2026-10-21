@@ -551,8 +551,8 @@ function sumRuns(arr){ return (arr||[]).reduce((t,v)=> t + (Number.isFinite(+v) 
 function resultOf(m){
   const r = state.results[m.id] || {};
   const estado = r.estado || "programado";
-  const ra = sumRuns(r.a), rb = sumRuns(r.b);
-  return {...r, estado, ra, rb, done: estado==="finalizado" || estado==="wo"};
+  const hasInn = [...(r.a||[]),...(r.b||[])].some(v=>v!==null&&v!==""&&v!==undefined); const ra = hasInn || r.ta==null || r.ta==="" ? sumRuns(r.a) : +r.ta, rb = hasInn || r.tb==null || r.tb==="" ? sumRuns(r.b) : +r.tb;
+  return {...r, estado, ra, rb, hasInn, done: estado==="finalizado" || estado==="wo"};
 }
 
 /* ---------- tabla ---------- */
@@ -634,7 +634,7 @@ function matchCard(m){
   const provisional = (!tm.confirmed && computeTable().some(x=>x.pj>0)) ? `<span>Hoy irían: ${esc(TEAMS[tm.a].nombre)} y ${esc(TEAMS[tm.b].nombre)}</span>` : "";
   const meta = `<div class="meta"><span>${ICONS.cal}${fmtDate(m.fecha)}</span><span>${ICONS.clock}${esc(r.hora||"5:00 p. m.")}</span><span>${ICONS.pin}${esc(r.lugar||"Cancha de softbol")}</span>${provisional}</div>`;
   const edit = state.auth && state.isOrg && API.online ? `<button class="btn small" data-edit="${m.id}">Cargar resultado</button>` : "";
-  const ls = hasScore && r.estado!=="wo" && tm.confirmed ? lineScore(m, r, tm.a, tm.b) : "";
+  const ls = hasScore && r.hasInn && r.estado!=="wo" && tm.confirmed ? lineScore(m, r, tm.a, tm.b) : "";
   const wo = r.estado==="wo" && r.wo ? `<div class="note">W.O. a favor de ${esc(TEAMS[r.wo]?.nombre||"")}.</div>` : "";
   const nota = r.nota ? `<div class="note">${esc(r.nota)}</div>` : "";
   return `<article class="card match" id="m-${m.id}">
@@ -738,7 +738,7 @@ function openEditor(mid){
       <div class="field"><label for="edHora">Hora</label><input id="edHora" placeholder="5:00 p. m." value="${esc(r.hora||"")}"></div>
       <div class="field"><label for="edLugar">Lugar</label><input id="edLugar" placeholder="Cancha de softbol" value="${esc(r.lugar||"")}"></div>
       <div class="field full"><label>Carreras por entrada</label><div class="inn"><table><tr><th></th>${Array.from({length:INN},(_,i)=>`<th>${i+1}</th>`).join("")}<th>Extra</th></tr>${inRow(tm.a,r.a,"a")}${inRow(tm.b,r.b,"b")}</table></div></div>
-      <div class="field full"><label for="edNota">Nota (opcional)</label><input id="edNota" maxlength="200" placeholder="Ej.: Jugadora destacada, incidencias…" value="${esc(r.nota||"")}"></div>
+      <div class="field"><label for="edTa">Total ${esc(TEAMS[tm.a].nombre)} (si no tienes las entradas)</label><input id="edTa" type="number" min="0" inputmode="numeric" value="${r.ta??""}"></div><div class="field"><label for="edTb">Total ${esc(TEAMS[tm.b].nombre)} (si no tienes las entradas)</label><input id="edTb" type="number" min="0" inputmode="numeric" value="${r.tb??""}"></div><div class="field full"><label for="edNota">Nota (opcional)</label><input id="edNota" maxlength="200" placeholder="Ej.: Jugadora destacada, incidencias…" value="${esc(r.nota||"")}"></div>
     </div>
     <div class="status-msg" id="edMsg" role="status"></div>
     <div class="row-actions"><button class="btn" id="edCancel">Cancelar</button><button class="btn primary" id="edSave">Guardar</button></div>
@@ -751,7 +751,7 @@ function openEditor(mid){
   $("#edSave").onclick = async ()=>{
     const read = k => Array.from({length:INN+1},(_,i)=>{ const v=$(`#in-${k}-${i}`).value.trim(); return v===""?null:Math.max(0,Math.floor(+v)); });
     const doc = { estado: sel.value, a: read("a"), b: read("b"), hora: $("#edHora").value.trim(), lugar: $("#edLugar").value.trim(), nota: $("#edNota").value.trim(), equipos:[tm.a, tm.b], actualizado: new Date().toISOString() };
-    if(sel.value==="wo") doc.wo = $("#edWo").value;
+    { const tv=id=>{const v=$(id).value.trim();return v===""?null:Math.max(0,Math.floor(+v));}; doc.ta=tv("#edTa"); doc.tb=tv("#edTb"); } if(sel.value==="wo") doc.wo = $("#edWo").value;
     const btn = $("#edSave"); btn.disabled = true; $("#edMsg").textContent = "Guardando…"; $("#edMsg").className="status-msg";
     try{ await API.saveResult(mid, doc); state.results[mid] = doc; renderAll(); closeModal(); }
     catch(err){ btn.disabled=false; $("#edMsg").className="status-msg err"; $("#edMsg").textContent = err && err.code==="42501" ? "Tu usuario no está registrado como organizador. Agrégalo en la tabla organizadores de Supabase." : "No se pudo guardar. Revisa la conexión e intenta de nuevo."; }
