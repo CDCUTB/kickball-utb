@@ -1,1 +1,12 @@
-{}
+{
+  "p1": {
+    "estado": "finalizado",
+    "a": [],
+    "b": [],
+    "ta": 9,
+    "tb": 7,
+    "hora": "5:00 p. m.",
+    "lugar": "Cancha de softbol",
+    "nota": ""
+  }
+}
