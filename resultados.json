@@ -8,5 +8,15 @@
     "hora": "5:00 p. m.",
     "lugar": "Cancha de softbol",
     "nota": ""
+  },
+  "p2": {
+    "estado": "finalizado",
+    "a": [],
+    "b": [],
+    "ta": 13,
+    "tb": 1,
+    "hora": "5:00 p. m.",
+    "lugar": "Cancha de softbol",
+    "nota": ""
   }
 }
