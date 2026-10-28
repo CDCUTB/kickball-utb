@@ -3,20 +3,30 @@
     "estado": "finalizado",
     "a": [],
     "b": [],
-    "ta": 9,
-    "tb": 7,
     "hora": "5:00 p. m.",
     "lugar": "Cancha de softbol",
-    "nota": ""
+    "nota": "",
+    "ta": 9,
+    "tb": 7
   },
   "p2": {
     "estado": "finalizado",
     "a": [],
     "b": [],
-    "ta": 13,
-    "tb": 1,
     "hora": "5:00 p. m.",
     "lugar": "Cancha de softbol",
-    "nota": ""
+    "nota": "",
+    "ta": 13,
+    "tb": 1
+  },
+  "p4": {
+    "estado": "finalizado",
+    "a": [],
+    "b": [],
+    "hora": "5:00 p. m.",
+    "lugar": "Cancha de softbol",
+    "nota": "",
+    "ta": 11,
+    "tb": 4
   }
 }
