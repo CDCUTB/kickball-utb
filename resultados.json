@@ -19,6 +19,16 @@
     "ta": 13,
     "tb": 1
   },
+  "p3": {
+    "estado": "finalizado",
+    "a": [],
+    "b": [],
+    "hora": "5:00 p. m.",
+    "lugar": "Cancha de softbol",
+    "nota": "",
+    "ta": 17,
+    "tb": 0
+  },
   "p4": {
     "estado": "finalizado",
     "a": [],
